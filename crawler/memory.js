@@ -103,7 +103,7 @@ const getMemory = (keyword) => {
     return [`keywordNotFound`];
   }
 
-  return [memory[found], crawledAt];
+  return [memory[found].memo, crawledAt];
 };
 
 export default {
