@@ -90,8 +90,25 @@ const getAllMemory = () => {
   return [memory, crawledAt];
 };
 
+/**
+ * 키워드를 검색해 해당 키워드에 대한 메모 목록을 읽어온다.
+ * @param {*} keyword
+ */
+const getMemory = (keyword) => {
+  // 키워드 존재 여부
+  const found = memory.findIndex((val) => {
+    return val.keyword == keyword;
+  });
+  if (-1 == found) {
+    return [`keywordNotFound`];
+  }
+
+  return [memory[found], crawledAt];
+};
+
 export default {
   resetMemory,
   getAllMemory,
+  getMemory,
   setMemory,
 };

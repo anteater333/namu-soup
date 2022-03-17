@@ -1,13 +1,16 @@
 import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+
 import init from "./crawler.js";
 import db from "./memory.js";
-
-import bodyParser from "body-parser";
 
 const app = express();
 const port = 3030;
 
 init();
+
+app.use(cors({ origin: "*" }));
 
 app.use(bodyParser.json());
 
@@ -16,6 +19,18 @@ app.use(bodyParser.json());
  */
 app.get("/api/", (req, res) => {
   res.send(db.getAllMemory());
+});
+
+/**
+ * 해당 키워드 메모 가져오기
+ */
+app.get("/api/:keyword", (req, res) => {
+  const result = db.getMemory(req.params.keyword);
+
+  if (result[0] == `keywordNotFound`) {
+    return res.status(404).send({ msg: "Not found such keyword" });
+  }
+  res.send(result);
 });
 
 /**

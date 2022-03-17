@@ -22,7 +22,7 @@ function crawlerService() {
   crawlNamuTrendings();
 
   setTimeout(() => {
-    crawlNamuTrendings();
+    crawlerService();
   }, CRAWLING_TIMER);
 }
 
