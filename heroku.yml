@@ -2,4 +2,4 @@ build:
   docker:
     crawler: crawler/Dockerfile
 run:
-  crawler: npm start
+  crawler: cd /home/seluser/namu-soup/crawler && npm start
