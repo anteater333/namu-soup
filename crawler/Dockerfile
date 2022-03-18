@@ -20,4 +20,4 @@ ENV PORT=$port
 
 EXPOSE $PORT
 
-CMD ["npm", "start"]
+CMD ["bash"]
