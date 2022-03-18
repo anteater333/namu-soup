@@ -8,7 +8,7 @@ import db from "./memory.js";
 const app = express();
 const port = process.env.PORT || 8080;
 
-init();
+// init();
 
 app.use(cors({ origin: "*" }));
 
