@@ -16,6 +16,8 @@ WORKDIR /home/seluser/namu-soup/crawler
 
 RUN npm install
 
-EXPOSE 3030
+ENV PORT=$port
+
+EXPOSE $PORT
 
 # CMD ["npm", "start"]
