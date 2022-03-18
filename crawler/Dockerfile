@@ -19,3 +19,6 @@ RUN npm install
 ENV PORT=$port
 
 EXPOSE $PORT
+
+ENTRYPOINT ["/opt/bin/entry_point.sh"]
+CMD ["npm", "start"]
