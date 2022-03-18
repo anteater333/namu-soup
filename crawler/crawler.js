@@ -8,10 +8,16 @@ const URL = "https://namu.wiki/member/login";
 const PATH_TO_INPUT = "/html/body/div/div/div[1]/nav/form/div/div/input";
 const DIV_ID = "xe4jGj1HQ";
 
+let driver;
+
 /**
  * 크롤러 서비스를 등록한다.
  */
-function init() {
+async function init() {
+  driver = await new Builder()
+    .forBrowser("firefox")
+    .setFirefoxOptions({ headless: true })
+    .build();
   crawlerService();
 }
 
@@ -30,7 +36,6 @@ function crawlerService() {
  * Core Crawling logic
  */
 async function crawlNamuTrendings() {
-  let driver = await new Builder().forBrowser("firefox").build();
   try {
     await driver.get(URL);
     const input = await driver.findElement(By.xpath(PATH_TO_INPUT));
