@@ -19,5 +19,3 @@ RUN npm install
 ENV PORT=$port
 
 EXPOSE $PORT
-
-CMD ["bash"]
