@@ -20,5 +20,6 @@ ENV PORT=$port
 
 EXPOSE $PORT
 
-ENTRYPOINT ["/opt/bin/entry_point.sh"]
-CMD ["npm", "start"]
+COPY entrypoint.sh ./entrypoint.sh
+
+ENTRYPOINT ["bash", "./entrypoint.sh"]
