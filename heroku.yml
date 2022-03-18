@@ -1,0 +1,5 @@
+build:
+  docker:
+    crawler: crawler/Dockerfile
+run:
+  crawler: npm start

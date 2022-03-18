@@ -6,7 +6,7 @@ import init from "./crawler.js";
 import db from "./memory.js";
 
 const app = express();
-const port = 3030;
+const port = process.env.PORT || 3030;
 
 init();
 
