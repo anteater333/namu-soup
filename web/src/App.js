@@ -8,10 +8,19 @@ import MemoList from "./components/MemoList";
 import NotFoundPage from "./components/NotFoundPage";
 
 import { Route, Routes } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function App() {
   return (
     <div className="App">
+      <Helmet>
+        <meta name="description" content="숲, 나무위키 인기 검색어" />
+        <meta
+          name="keywords"
+          content="namu, wiki, 숲, 나무위키, 인기, 검색어"
+        />
+        <meta property="og:title" content="숲Soup - 나무위키 인기 검색어" />
+      </Helmet>
       <Header />
       <Routes>
         <Route path="/" element={<TrendingList />} />
