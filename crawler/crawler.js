@@ -16,7 +16,6 @@ async function init() {
   driver = await new Builder()
     .forBrowser("firefox")
     .setFirefoxOptions({ headless: true })
-    .usingServer("http://localhost:4444/wd/hub")
     .build();
 
   await driver.manage().setTimeouts({
@@ -45,7 +44,14 @@ function crawlerService() {
 async function crawlNamuTrendings() {
   try {
     await driver.get(URL);
-    const input = await driver.findElement(By.xpath(PATH_TO_INPUT));
+
+    console.log("-----");
+    console.log(await driver.getPageSource());
+    console.log("-----");
+
+    const input = await driver.wait(
+      until.elementIsVisible(driver.findElement(By.xpath(PATH_TO_INPUT)))
+    );
     await input.click();
 
     const trendingContainer = await driver.wait(
