@@ -18,6 +18,13 @@ async function init() {
     .forBrowser("firefox")
     .setFirefoxOptions({ headless: true })
     .build();
+
+  await driver.manage().setTimeouts({
+    implicit: 60000,
+    pageLoad: 60000,
+    script: 60000,
+  });
+
   crawlerService();
 }
 
