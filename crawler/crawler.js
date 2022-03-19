@@ -1,5 +1,4 @@
 import { Builder, By, until } from "selenium-webdriver";
-import { v1 } from "uuid";
 
 import db from "./memory.js";
 
@@ -17,6 +16,7 @@ async function init() {
   driver = await new Builder()
     .forBrowser("firefox")
     .setFirefoxOptions({ headless: true })
+    .usingServer("http://localhost:4444/wd/hub")
     .build();
 
   await driver.manage().setTimeouts({
@@ -45,7 +45,6 @@ function crawlerService() {
 async function crawlNamuTrendings() {
   try {
     await driver.get(URL);
-    console.log(driver);
     const input = await driver.findElement(By.xpath(PATH_TO_INPUT));
     await input.click();
 
