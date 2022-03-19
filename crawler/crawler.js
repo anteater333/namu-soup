@@ -45,6 +45,7 @@ function crawlerService() {
 async function crawlNamuTrendings() {
   try {
     await driver.get(URL);
+    console.log(driver);
     const input = await driver.findElement(By.xpath(PATH_TO_INPUT));
     await input.click();
 
