@@ -45,10 +45,6 @@ async function crawlNamuTrendings() {
   try {
     await driver.get(URL);
 
-    console.log("-----");
-    console.log(await driver.getPageSource());
-    console.log("-----");
-
     const input = await driver.wait(
       until.elementIsVisible(driver.findElement(By.xpath(PATH_TO_INPUT)))
     );
