@@ -1,12 +1,12 @@
 import { Builder, By, until } from "selenium-webdriver";
-import firefox from "selenium-webdriver/firefox"
+import firefox from "selenium-webdriver/firefox.js"
 
 import db from "./memory.js";
 
 const CRAWLING_TIMER = 300000;
 const URL = "https://namu.wiki/member/login";
 const PATH_TO_INPUT = "/html/body/div/div/div[1]/nav/form/div/div/input";
-const DIV_ID = "xe4jGj1HQ";
+const PATH_TO_TRENDING_DIV = "/html/body/div/div/div[1]/nav/form/div/div/div";
 
 let driver;
 
@@ -14,9 +14,14 @@ let driver;
  * 크롤러 서비스를 등록한다.
  */
 async function init() {
+  const screen = {
+    width: 640,
+    height: 480
+  };
+
   driver = await new Builder()
     .forBrowser("firefox")
-    .setFirefoxOptions(new firefox.Options().headless())
+    .setFirefoxOptions(new firefox.Options().headless().windowSize(screen))
     .build();
 
   await driver.manage().setTimeouts({
@@ -54,7 +59,7 @@ async function crawlNamuTrendings() {
     await input.click();
 
     const trendingContainer = await driver.wait(
-      until.elementIsVisible(driver.findElement(By.id(DIV_ID)))
+      until.elementIsVisible(driver.findElement(By.xpath(PATH_TO_TRENDING_DIV)))
     );
 
     const trendings = await trendingContainer.findElements(By.xpath("./div"));
