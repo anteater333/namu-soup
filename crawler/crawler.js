@@ -72,7 +72,6 @@ async function crawlNamuTrendings() {
 
     db.resetMemory(newTrendings);
   } finally {
-    await driver.quit();
   }
 }
 
