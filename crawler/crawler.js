@@ -1,4 +1,5 @@
 import { Builder, By, until } from "selenium-webdriver";
+import firefox from "selenium-webdriver/firefox"
 
 import db from "./memory.js";
 
@@ -15,6 +16,7 @@ let driver;
 async function init() {
   driver = await new Builder()
     .forBrowser("firefox")
+    .setFirefoxOptions(new firefox.Options().headless())
     .build();
 
   await driver.manage().setTimeouts({
