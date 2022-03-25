@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/namu-soup/static/css/main.ea1c7da0.css",
-    "main.js": "/namu-soup/static/js/main.9853cac9.js",
+    "main.js": "/namu-soup/static/js/main.6825c790.js",
     "static/js/787.5fbdf94a.chunk.js": "/namu-soup/static/js/787.5fbdf94a.chunk.js",
     "index.html": "/namu-soup/index.html",
     "main.ea1c7da0.css.map": "/namu-soup/static/css/main.ea1c7da0.css.map",
-    "main.9853cac9.js.map": "/namu-soup/static/js/main.9853cac9.js.map",
+    "main.6825c790.js.map": "/namu-soup/static/js/main.6825c790.js.map",
     "787.5fbdf94a.chunk.js.map": "/namu-soup/static/js/787.5fbdf94a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ea1c7da0.css",
-    "static/js/main.9853cac9.js"
+    "static/js/main.6825c790.js"
   ]
 }
