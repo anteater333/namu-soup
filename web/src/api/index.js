@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/";
+const API_URL = "http://118.67.131.205:8080/api";
 
 const axiosClient = {
   getTrendingList: async () => {
