@@ -15,7 +15,6 @@ let driver;
 async function init() {
   driver = await new Builder()
     .forBrowser("firefox")
-    .setFirefoxOptions({ headless: true })
     .build();
 
   await driver.manage().setTimeouts({
