@@ -1,35 +1,20 @@
-import { Builder, By, until } from "selenium-webdriver";
-import firefox from "selenium-webdriver/firefox.js"
+import { exec } from "child_process";
+import { promisify } from "util";
 
 import db from "./memory.js";
 
 const CRAWLING_TIMER = 300000;
-const URL = "https://namu.wiki/member/login";
-const PATH_TO_INPUT = "/html/body/div/div/div[1]/nav/form/div/div/input";
-const PATH_TO_TRENDING_DIV = "/html/body/div/div/div[1]/nav/form/div/div/div";
+const URL = "https://search.namu.wiki/api/ranking";
+const USERAGENT = `"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0"`;
 
-let driver;
+const COMMAND = "curl -L -k -v -A";
+
+const execPromise = promisify(exec);
 
 /**
  * 크롤러 서비스를 등록한다.
  */
 async function init() {
-  const screen = {
-    width: 640,
-    height: 480
-  };
-
-  driver = await new Builder()
-    .forBrowser("firefox")
-    .setFirefoxOptions(new firefox.Options().headless().windowSize(screen))
-    .build();
-
-  await driver.manage().setTimeouts({
-    implicit: 60000,
-    pageLoad: 60000,
-    script: 60000,
-  });
-
   crawlerService();
 }
 
@@ -39,7 +24,7 @@ async function init() {
 function crawlerService() {
   crawlNamuTrendings();
 
-  const randInterval = Math.floor(Math.random() * (9876 - 2581)) + 25810
+  const randInterval = Math.floor(Math.random() * (9876 - 2581)) + 25810;
 
   setTimeout(() => {
     crawlerService();
@@ -50,29 +35,20 @@ function crawlerService() {
  * Core Crawling logic
  */
 async function crawlNamuTrendings() {
-  try {
-    await driver.get(URL);
+  // db 초기화
+  const newTrendings = [];
 
-    const input = await driver.wait(
-      until.elementIsVisible(driver.findElement(By.xpath(PATH_TO_INPUT)))
-    );
-    await input.click();
+  const { stdout, stderr, error } = await execPromise(
+    [COMMAND, USERAGENT, URL].join(" ")
+  );
 
-    const trendingContainer = await driver.wait(
-      until.elementIsVisible(driver.findElement(By.xpath(PATH_TO_TRENDING_DIV)))
-    );
+  const trendings = JSON.parse(stdout);
 
-    const trendings = await trendingContainer.findElements(By.xpath("./div"));
+  trendings.forEach((trending) => {
+    newTrendings.push(trending);
+  });
 
-    // db 초기화
-    const newTrendings = [];
-    for await (const [idx, trending] of trendings.entries()) {
-      newTrendings.push(await trending.getText());
-    }
-
-    db.resetMemory(newTrendings);
-  } finally {
-  }
+  db.resetMemory(newTrendings);
 }
 
 export default init;
