@@ -4,14 +4,14 @@ import { v1 } from "uuid";
  * 네, 조촐해 보이겠지만 우리 서비스의 데이터베이스입니다.
  */
 let memory = [];
-let crawledAt;
+let parsedAt;
 
 // memory = [ { keyword, memo } ], length = 10
 // memo = [ { uuid, context, lastWriter }], length = 10
 
 /**
  * DB 갈아엎기, 대신 이전 메모는 유지
- * @param {*} newTrendings
+ * @param {Array} newTrendings 나무위기 인기 검색어 목록
  */
 const resetMemory = (newTrendings) => {
   const newMemory = [];
@@ -33,8 +33,8 @@ const resetMemory = (newTrendings) => {
 
   memory = newMemory;
 
-  crawledAt = new Date().toString();
-  console.log(crawledAt + " :: Server reset trending data memory.");
+  parsedAt = new Date().toString();
+  console.log(parsedAt + " :: Server reset trending data memory.");
 };
 
 /**
@@ -87,7 +87,7 @@ const setMemory = (keyword, memoSlotNum, uuid, memo, writer) => {
  * @returns
  */
 const getAllMemory = () => {
-  return [memory, crawledAt];
+  return [memory, parsedAt];
 };
 
 /**
@@ -103,7 +103,7 @@ const getMemory = (keyword) => {
     return [`keywordNotFound`];
   }
 
-  return [memory[found].memo, crawledAt];
+  return [memory[found].memo, parsedAt];
 };
 
 export default {

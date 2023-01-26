@@ -2,13 +2,14 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 
-import init from "./crawler.js";
+import * as dotenv from "dotenv";
+
 import db from "./memory.js";
+
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8080;
-
-init();
 
 app.use(cors({ origin: "*" }));
 
@@ -19,6 +20,29 @@ app.use(bodyParser.json());
  */
 app.get("/api/", (req, res) => {
   res.send(db.getAllMemory());
+});
+
+/**
+ * 전체 순위 새로 업데이트하기, 비밀번호를 가지고 있는 Agent(soup-yojeong)만이 수정 가능
+ */
+app.put("/api/", (req, res) => {
+  // 스키마 검사
+  const body = {};
+  if (req.body.pwd !== undefined && req.body.trendings !== undefined) {
+    body.pwd = req.body.pwd;
+    body.trendings = req.body.trendings;
+  } else {
+    return res.status(400).send({ msg: "body should be {trendings, pwd}" });
+  }
+
+  if (process.env.AGENT_SECRET !== body.pwd) {
+    return res.status(401).send({ msg: "Wrong password" });
+  }
+
+  // update trendings
+  db.resetMemory(body.trendings);
+
+  res.status(201).send({ msg: `updated` });
 });
 
 /**
