@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 
 import * as dotenv from "dotenv";
 
+import logger, { httpLoggerMiddleware } from "./logger.js";
+
 import db from "./memory.js";
 
 dotenv.config();
@@ -14,6 +16,11 @@ const port = process.env.PORT || 8080;
 app.use(cors({ origin: "*" }));
 
 app.use(bodyParser.json());
+
+/**
+ * Logging middleware
+ */
+app.use(httpLoggerMiddleware);
 
 /**
  * 전체 순위 가져오기
@@ -91,6 +98,6 @@ app.post("/api/:keyword", (req, res) => {
 });
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Server time : ${new Date().toString()}`);
-  console.log(`Crawler listening on port ${port}`);
+  logger.info(`Server time : ${new Date().toString()}`);
+  logger.info(`Crawler listening on port ${port}`);
 });

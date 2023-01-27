@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon"
   },
   "author": "",
   "license": "ISC",
@@ -15,9 +16,15 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.17.3",
+    "morgan": "^1.10.0",
     "node-fetch": "^3.2.3",
     "node-libcurl": "^2.3.4",
     "selenium-webdriver": "^4.1.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "^4.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }

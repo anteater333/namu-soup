@@ -1,4 +1,5 @@
 import { v1 } from "uuid";
+import logger from "./logger.js";
 
 /**
  * 네, 조촐해 보이겠지만 우리 서비스의 데이터베이스입니다.
@@ -34,7 +35,7 @@ const resetMemory = (newTrendings) => {
   memory = newMemory;
 
   parsedAt = new Date().toString();
-  console.log(parsedAt + " :: Server reset trending data memory.");
+  logger.info(parsedAt + " :: Server reset trending data memory.");
 };
 
 /**
