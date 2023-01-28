@@ -10,6 +10,9 @@ import db from "./memory.js";
 
 dotenv.config();
 
+// 초기화
+db.initMemory();
+
 const app = express();
 const port = process.env.PORT || 8080;
 

@@ -1,6 +1,14 @@
 import { v1 } from "uuid";
 import logger from "./logger.js";
 
+import fs from "fs/promises";
+import { writeFile } from "fs";
+
+/**
+ * 복구용 파일 경로
+ */
+const recoveryFilePath = "./logs/soup_recovery.json";
+
 /**
  * 네, 조촐해 보이겠지만 우리 서비스의 데이터베이스입니다.
  */
@@ -11,10 +19,34 @@ let parsedAt;
 // memo = [ { uuid, context, lastWriter }], length = 10
 
 /**
+ * 서버 실행 시 메모리 초기 설정
+ * 지정 경로에 이전 실검 데이터 파일이 존재하면 그것을 사용해 초기화
+ * 파일이 없으면 경고 출력 후 그냥 넘어감
+ */
+const initMemory = async () => {
+  try {
+    const recoveryFileData = await fs.readFile(recoveryFilePath, "utf-8");
+
+    const [recoveredTrendingData, parsedAt] = JSON.parse(recoveryFileData);
+
+    resetMemory(recoveredTrendingData, parsedAt);
+  } catch (error) {
+    if (error.code === "ENOENT") {
+      logger.warn(`could not found recovery file.`);
+      logger.warn(`No trending data`);
+    } else {
+      logger.error(`Unhandled file system error: ${error.code}`);
+      logger.error(error);
+    }
+    logger.warn(`Failed to initiate trending database.`);
+  }
+};
+
+/**
  * DB 갈아엎기, 대신 이전 메모는 유지
  * @param {Array} newTrendings 나무위기 인기 검색어 목록
  */
-const resetMemory = (newTrendings) => {
+const resetMemory = (newTrendings, parsedAt) => {
   const newMemory = [];
 
   for (const trending of newTrendings) {
@@ -34,8 +66,23 @@ const resetMemory = (newTrendings) => {
 
   memory = newMemory;
 
-  parsedAt = new Date().toString();
-  logger.info(parsedAt + " :: Server reset trending data memory.");
+  if (!parsedAt) parsedAt = new Date().toString();
+  logger.info(
+    "Server reset trending data memory. (data parsed at " + parsedAt + ")"
+  );
+  logger.info(`new trending data : [ ${newTrendings.join(", ")} ]`);
+
+  // 서버 종료 시 복구용 데이터 저장
+  writeFile(
+    recoveryFilePath,
+    JSON.stringify([newTrendings, parsedAt]),
+    (error) => {
+      if (error) {
+        logger.error(`Failed to save recovery data.`);
+        logger.error(error);
+      }
+    }
+  );
 };
 
 /**
@@ -112,4 +159,5 @@ export default {
   getAllMemory,
   getMemory,
   setMemory,
+  initMemory,
 };
