@@ -46,7 +46,7 @@ const initMemory = async () => {
  * DB 갈아엎기, 대신 이전 메모는 유지
  * @param {Array} newTrendings 나무위기 인기 검색어 목록
  */
-const resetMemory = (newTrendings, parsedAt) => {
+const resetMemory = (newTrendings, newParsedAt) => {
   const newMemory = [];
 
   for (const trending of newTrendings) {
@@ -66,7 +66,8 @@ const resetMemory = (newTrendings, parsedAt) => {
 
   memory = newMemory;
 
-  if (!parsedAt) parsedAt = new Date().toString();
+  if (!newParsedAt) parsedAt = new Date().toString();
+  else parsedAt = newParsedAt;
   logger.info(
     "Server reset trending data memory. (data parsed at " + parsedAt + ")"
   );
