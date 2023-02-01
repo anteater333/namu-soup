@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const API_URL = "http://118.67.131.205:8080/api";
-const API_URL = "http://localhost:8080/api";
+const API_URL = "/api";
 
 const axiosClient = {
   getTrendingList: async () => {
@@ -15,7 +15,7 @@ const axiosClient = {
   },
   getMemoList: async (keyword) => {
     try {
-      const response = await axios.get(API_URL + `${keyword}`);
+      const response = await axios.get(API_URL + `/${keyword}`);
       return response.data;
     } catch (error) {
       if (error.response.status === 404) {
@@ -29,7 +29,7 @@ const axiosClient = {
   writeMemo: async (keyword, uuid, context, slot) => {
     const body = { uuid: uuid ? uuid : "tmp", memo: context, slot: slot };
     try {
-      await axios.post(API_URL + `${keyword}`, body);
+      await axios.post(API_URL + `/${keyword}`, body);
 
       return true;
     } catch (error) {
