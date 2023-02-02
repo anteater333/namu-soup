@@ -100,7 +100,7 @@ app.post("/api/:keyword", (req, res) => {
   }
 });
 
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, "127.0.0.1", () => {
   logger.info(`Server time : ${new Date().toString()}`);
   logger.info(`Crawler listening on port ${port}`);
 });

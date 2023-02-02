@@ -3,6 +3,7 @@ import logger from "./logger.js";
 
 import fs from "fs/promises";
 import { writeFile } from "fs";
+import { getLimitedCurrentTime } from "./util.js";
 
 /**
  * 복구용 파일 경로
@@ -66,7 +67,7 @@ const resetMemory = (newTrendings, newParsedAt) => {
 
   memory = newMemory;
 
-  if (!newParsedAt) parsedAt = new Date().toString();
+  if (!newParsedAt) parsedAt = getLimitedCurrentTime(new Date());
   else parsedAt = newParsedAt;
   logger.info(
     "Server reset trending data memory. (data parsed at " + parsedAt + ")"

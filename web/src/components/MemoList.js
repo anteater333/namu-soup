@@ -31,7 +31,7 @@ function MemoList() {
           setMemos(result[0]);
           setCrawledAt(result[1]);
         } else {
-          alert("현재 실시간 순위에 존재하지 않는 검색어입니다.");
+          alert("서버 기준 실시간 순위에 존재하지 않는 검색어입니다.");
           // eslint-disable-next-line no-restricted-globals
           location.href = "/";
         }
