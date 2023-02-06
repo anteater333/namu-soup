@@ -113,6 +113,10 @@ const setMemory = (keyword, memoSlotNum, uuid, memo, writer) => {
     return { msg: `badSlotNumber` };
   }
 
+  if (memo.length > 140) {
+    return { msg: "memoTooLong" };
+  }
+
   // uuid 일치 여부
   if (!savedMemo.uuid || savedMemo.uuid == uuid) {
     slot.memo[memoSlotNum] = {
