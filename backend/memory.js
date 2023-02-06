@@ -3,7 +3,7 @@ import logger from "./logger.js";
 
 import fs from "fs/promises";
 import { writeFile } from "fs";
-import { getLimitedCurrentTime } from "./util.js";
+import { getLimitedCurrentTime } from "./utils.js";
 
 /**
  * 복구용 파일 경로
