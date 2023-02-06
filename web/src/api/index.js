@@ -3,6 +3,24 @@ import axios from "axios";
 // const API_URL = "http://118.67.131.205:8080/api";
 const API_URL = "/api";
 
+const getBaseUrl = () => {
+  let url;
+  switch (process.env.NODE_ENV) {
+    case "production":
+      url = "http://118.67.131.205:8080"; // To be changed
+      break;
+    case "development":
+    default:
+      url = "";
+  }
+
+  return url;
+};
+
+axios.create({
+  baseURL: getBaseUrl(),
+});
+
 const axiosClient = {
   getTrendingList: async () => {
     try {

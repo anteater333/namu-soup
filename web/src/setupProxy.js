@@ -7,7 +7,7 @@ module.exports = (app) => {
       target: process.env.REACT_APP_API_SERVER
         ? process.env.REACT_APP_API_SERVER
         : "http://localhost:8080",
-      chageOrigin: true,
+      changeOrigin: true,
     })
   );
 };
