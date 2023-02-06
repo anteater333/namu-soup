@@ -97,8 +97,15 @@ function MemoList() {
             }}
           ></Form.Control>
           <div className="input-button-container">
-            <Button onClick={handleSubmitButton}>메모</Button>
-            <Button onClick={toggleMemoMode}>닫기</Button>
+            <Button className="soup-button" onClick={handleSubmitButton}>
+              기록
+            </Button>
+            <Button
+              className="soup-button soup-button-reject"
+              onClick={toggleMemoMode}
+            >
+              닫기
+            </Button>
           </div>
         </div>
       </div>
@@ -117,10 +124,10 @@ function MemoList() {
   const listItem = memos.map((memo, idx) => {
     const memoButton = (
       <Button
-        className="list-item-button fw-bold"
+        className="soup-button list-item-button fw-bold"
         onClick={() => handleMemoButton(memo, idx)}
       >
-        메모
+        기록
       </Button>
     );
     if (memo.context) {

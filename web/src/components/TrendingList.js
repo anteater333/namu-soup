@@ -54,9 +54,9 @@ function TrendingList() {
         <Button
           as={Link}
           to={`/m/${trending.keyword}`}
-          className="list-item-button fw-bold"
+          className="soup-button list-item-button fw-bold"
         >
-          메모
+          기록
         </Button>
       </ListGroupItem>
     );
