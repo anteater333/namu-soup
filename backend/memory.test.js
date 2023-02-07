@@ -1,4 +1,4 @@
-import { assertEquals } from "./asserts.js";
+import { assertEquals, assertExists } from "./asserts.js";
 import db from "./memory.js";
 
 // Very simple test code
@@ -45,9 +45,6 @@ function 삭제_함수를_실행_후_메모가_삭제된_것이_확인된다() {
     setTimeout(() => {
       const currentFirstKeyword = db.getAllMemory()[0][0];
 
-      console.log(currentFirstKeyword.keyword);
-      console.log(currentFirstKeyword.memo[0]);
-
       const result = db.setMemory(
         currentFirstKeyword.keyword,
         0,
@@ -56,7 +53,15 @@ function 삭제_함수를_실행_후_메모가_삭제된_것이_확인된다() {
         "127.0.0.1"
       );
 
+      console.log(currentFirstKeyword.keyword);
+      console.log(currentFirstKeyword.memo[0]);
+
       assertEquals("done", result.msg);
+      assertEquals(
+        JSON.stringify(currentFirstKeyword.memo[0]),
+        JSON.stringify(result.newMemo ? result.newMemo : {})
+      );
+      assertExists(currentFirstKeyword.memo[0].memoAt);
 
       const deletedResult = db.clearMemorySlot(currentFirstKeyword.keyword, 0);
 
