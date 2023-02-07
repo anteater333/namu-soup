@@ -178,7 +178,10 @@ const clearMemorySlot = (keyword, slot) => {
   }
 
   // 삭☆제
+  const deletedMemo = memory[found].memo[slot];
   memory[found].memo[slot] = {};
+
+  return [`done`, deletedMemo];
 };
 
 export default {

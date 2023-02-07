@@ -58,7 +58,9 @@ function 삭제_함수를_실행_후_메모가_삭제된_것이_확인된다() {
 
       assertEquals("done", result.msg);
 
-      db.clearMemorySlot(currentFirstKeyword.keyword, 0);
+      const deletedResult = db.clearMemorySlot(currentFirstKeyword.keyword, 0);
+
+      assertEquals(dummyMemoString, deletedResult[1].context);
 
       const resultFirstKeyword = db.getAllMemory()[0][0];
 
