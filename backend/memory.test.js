@@ -36,5 +36,40 @@ function 길이가_긴_문자열은_거절한다() {
     assertEquals(expected, memoResultMsg);
   });
 }
+function 삭제_함수를_실행_후_메모가_삭제된_것이_확인된다() {
+  console.log(삭제_함수를_실행_후_메모가_삭제된_것이_확인된다.name);
 
-길이가_긴_문자열은_거절한다();
+  const dummyMemoString = "곧 삭제될 메모";
+
+  db.initMemory().then(() => {
+    setTimeout(() => {
+      const currentFirstKeyword = db.getAllMemory()[0][0];
+
+      console.log(currentFirstKeyword.keyword);
+      console.log(currentFirstKeyword.memo[0]);
+
+      const result = db.setMemory(
+        currentFirstKeyword.keyword,
+        0,
+        "",
+        dummyMemoString,
+        "127.0.0.1"
+      );
+
+      assertEquals("done", result.msg);
+
+      db.clearMemorySlot(currentFirstKeyword.keyword, 0);
+
+      const resultFirstKeyword = db.getAllMemory()[0][0];
+
+      assertEquals(
+        JSON.stringify({}),
+        JSON.stringify(resultFirstKeyword.memo[0])
+      );
+    }, 1000);
+  });
+}
+
+// 길이가_긴_문자열은_거절한다();
+
+삭제_함수를_실행_후_메모가_삭제된_것이_확인된다();
