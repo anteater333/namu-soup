@@ -11,6 +11,7 @@ const recoveryFilePath = "./logs/soup_recovery.json";
 
 /**
  * 네, 조촐해 보이겠지만 우리 서비스의 데이터베이스입니다.
+ * @type {Array<{keyword: string, memo: Array<{uuid: string, context: string, lastWriter: string, memoAt: string}>}>}
  */
 let memory = [];
 let parsedAt;
@@ -159,10 +160,32 @@ const getMemory = (keyword) => {
   return [memory[found].memo, parsedAt];
 };
 
+/**
+ * 특정 키워드의 특정 슬롯의 메모를 초기화 한다. (관리자 전용 API에서만 호출 가능한 함수)
+ * @param {*} keyword
+ * @param {*} slot
+ */
+const clearMemorySlot = (keyword, slot) => {
+  // 키워드 존재 여부
+  const found = memory.findIndex((val) => {
+    return val.keyword == keyword;
+  });
+  if (-1 == found) {
+    return [`keywordNotFound`];
+  }
+  if (slot >= 10 || slot < 0) {
+    return [`badSlotNumber`];
+  }
+
+  // 삭☆제
+  memory[found].memo[slot] = {};
+};
+
 export default {
   resetMemory,
   getAllMemory,
   getMemory,
   setMemory,
   initMemory,
+  clearMemorySlot,
 };
