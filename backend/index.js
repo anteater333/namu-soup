@@ -100,6 +100,39 @@ app.post("/api/:keyword", (req, res) => {
   }
 });
 
+/**
+ * 관리자에 의한 메모 삭제
+ */
+app.delete("/api/:keyword/:memoSlot", (req, res) => {
+  // 스키마 검사
+  if (req.body.pwd === undefined) {
+    return res.status(400).send({ msg: "body should be {pwd}" });
+  }
+
+  // 권한 검사
+  if (process.env.ADMIN_SECRET !== req.body.pwd) {
+    return res.status(401).send({ msg: "You Shall Not Pass!" });
+  }
+
+  const deletedResult = db.clearMemorySlot(
+    req.params.keyword,
+    req.params.memoSlot
+  );
+
+  // 삭제 요청 실패 처리
+  if (deletedResult[0] === `keywordNotFound`) {
+    return res.status(404).send({ msg: "Not found such keyword" });
+  }
+  if (deletedResult[0] === `badSlotNumber`) {
+    return res.status(400).send({ msg: "Undesirable memo slot number" });
+  }
+  if (deletedResult[0] !== `done`) {
+    return res.status(500).send({ msg: "Unreachable error" });
+  }
+
+  return res.status(200).send(deletedResult[1]);
+});
+
 app.listen(port, "127.0.0.1", () => {
   logger.info(`Server time : ${new Date().toString()}`);
   logger.info(`Server listening on port ${port}`);
