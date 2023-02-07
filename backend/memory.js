@@ -2,7 +2,6 @@ import { v1 } from "uuid";
 import logger from "./logger.js";
 
 import fs from "fs/promises";
-import { writeFile } from "fs";
 import { getLimitedCurrentTime } from "./utils.js";
 
 /**
@@ -67,24 +66,24 @@ const resetMemory = (newTrendings, newParsedAt) => {
 
   memory = newMemory;
 
+  // 서버 종료 시 복구용 데이터 저장
+  fs.writeFile(recoveryFilePath, JSON.stringify([newTrendings, parsedAt]))
+    .then(() => {
+      logger.info(`Server saved new recovery data.`);
+    })
+    .catch((error) => {
+      if (error) {
+        logger.error(`Failed to save recovery data.`);
+        logger.error(error);
+      }
+    });
+
   if (!newParsedAt) parsedAt = getLimitedCurrentTime(new Date());
   else parsedAt = newParsedAt;
   logger.info(
     "Server reset trending data memory. (data parsed at " + parsedAt + ")"
   );
   logger.info(`new trending data : [ ${newTrendings.join(", ")} ]`);
-
-  // 서버 종료 시 복구용 데이터 저장
-  writeFile(
-    recoveryFilePath,
-    JSON.stringify([newTrendings, parsedAt]),
-    (error) => {
-      if (error) {
-        logger.error(`Failed to save recovery data.`);
-        logger.error(error);
-      }
-    }
-  );
 };
 
 /**
@@ -125,7 +124,7 @@ const setMemory = (keyword, memoSlotNum, uuid, memo, writer) => {
       lastWriter: writer,
     };
 
-    console.log(
+    logger.info(
       new Date().toString() +
         ` :: new Memo // ${keyword} // ${memoSlotNum} // ${memo} // ${writer}`
     );
