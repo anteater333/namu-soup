@@ -103,18 +103,33 @@ a:hover {
   margin-left: 2.5vh;
 }
 
-.list-item-button,
-.list-item-button:visited {
-  display: flex;
-  width: 7.5vh;
-  align-self: auto;
-  height: 100%;
+.soup-button,
+.soup-button:visited {
   background-color: #00a495;
   border: none;
   box-shadow: none;
 
   align-items: center;
   justify-content: center;
+}
+
+.soup-button-reject,
+.soup-button:hover,
+.soup-button:active,
+.soup-button:focus,
+.soup-button:target {
+  background-color: #614d42;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.list-item-button,
+.list-item-button:visited {
+  display: flex;
+  width: 7.5vh;
+  align-self: auto;
+  height: 100%;
 }
 
 .list-item-button:hover,

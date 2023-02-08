@@ -2,8 +2,7 @@ import { v1 } from "uuid";
 import logger from "./logger.js";
 
 import fs from "fs/promises";
-import { writeFile } from "fs";
-import { getLimitedCurrentTime } from "./util.js";
+import { getLimitedCurrentTime } from "./utils.js";
 
 /**
  * 복구용 파일 경로
@@ -12,6 +11,7 @@ const recoveryFilePath = "./logs/soup_recovery.json";
 
 /**
  * 네, 조촐해 보이겠지만 우리 서비스의 데이터베이스입니다.
+ * @type {Array<{keyword: string, memo: Array<{uuid: string, context: string, lastWriter: string, memoAt: string}>}>}
  */
 let memory = [];
 let parsedAt;
@@ -67,24 +67,24 @@ const resetMemory = (newTrendings, newParsedAt) => {
 
   memory = newMemory;
 
+  // 서버 종료 시 복구용 데이터 저장
+  fs.writeFile(recoveryFilePath, JSON.stringify([newTrendings, parsedAt]))
+    .then(() => {
+      logger.info(`Server saved new recovery data.`);
+    })
+    .catch((error) => {
+      if (error) {
+        logger.error(`Failed to save recovery data.`);
+        logger.error(error);
+      }
+    });
+
   if (!newParsedAt) parsedAt = getLimitedCurrentTime(new Date());
   else parsedAt = newParsedAt;
   logger.info(
     "Server reset trending data memory. (data parsed at " + parsedAt + ")"
   );
   logger.info(`new trending data : [ ${newTrendings.join(", ")} ]`);
-
-  // 서버 종료 시 복구용 데이터 저장
-  writeFile(
-    recoveryFilePath,
-    JSON.stringify([newTrendings, parsedAt]),
-    (error) => {
-      if (error) {
-        logger.error(`Failed to save recovery data.`);
-        logger.error(error);
-      }
-    }
-  );
 };
 
 /**
@@ -113,15 +113,20 @@ const setMemory = (keyword, memoSlotNum, uuid, memo, writer) => {
     return { msg: `badSlotNumber` };
   }
 
+  if (memo.length > 140) {
+    return { msg: "memoTooLong" };
+  }
+
   // uuid 일치 여부
   if (!savedMemo.uuid || savedMemo.uuid == uuid) {
     slot.memo[memoSlotNum] = {
       uuid: v1(),
       context: memo,
       lastWriter: writer,
+      memoAt: Date.now(),
     };
 
-    console.log(
+    logger.info(
       new Date().toString() +
         ` :: new Memo // ${keyword} // ${memoSlotNum} // ${memo} // ${writer}`
     );
@@ -156,10 +161,35 @@ const getMemory = (keyword) => {
   return [memory[found].memo, parsedAt];
 };
 
+/**
+ * 특정 키워드의 특정 슬롯의 메모를 초기화 한다. (관리자 전용 API에서만 호출 가능한 함수)
+ * @param {*} keyword
+ * @param {*} slot
+ */
+const clearMemorySlot = (keyword, slot) => {
+  // 키워드 존재 여부
+  const found = memory.findIndex((val) => {
+    return val.keyword == keyword;
+  });
+  if (-1 == found) {
+    return [`keywordNotFound`];
+  }
+  if (slot >= 10 || slot < 0) {
+    return [`badSlotNumber`];
+  }
+
+  // 삭☆제
+  const deletedMemo = memory[found].memo[slot];
+  memory[found].memo[slot] = {};
+
+  return [`done`, deletedMemo];
+};
+
 export default {
   resetMemory,
   getAllMemory,
   getMemory,
   setMemory,
   initMemory,
+  clearMemorySlot,
 };
