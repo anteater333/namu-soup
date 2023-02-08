@@ -123,7 +123,7 @@ const setMemory = (keyword, memoSlotNum, uuid, memo, writer) => {
       uuid: v1(),
       context: memo,
       lastWriter: writer,
-      memoAt: new Date().toString(),
+      memoAt: Date.now(),
     };
 
     logger.info(

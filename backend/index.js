@@ -7,6 +7,7 @@ import * as dotenv from "dotenv";
 import logger, { httpLoggerMiddleware } from "./logger.js";
 
 import db from "./memory.js";
+import { SameUserGuard } from "./guards.js";
 
 dotenv.config();
 
@@ -71,6 +72,11 @@ app.get("/api/:keyword", (req, res) => {
  * 해당 키워드에 메모 적어놓기
  */
 app.post("/api/:keyword", (req, res) => {
+  // SameUserGuard
+  if (SameUserGuard.checkUserRegistered(req.ip)) {
+    return res.status(429).send({ msg: "Too many requests." });
+  }
+
   // 스키마 검사
   const body = {};
   if (undefined != req.body.slot && req.body.memo && req.body.uuid) {
@@ -98,6 +104,7 @@ app.post("/api/:keyword", (req, res) => {
   } else if (result.msg == `memoTooLong`) {
     res.status(419).send({ msg: "Memo too long." });
   } else if (result.msg == `done`) {
+    SameUserGuard.registerUser(req.ip);
     res.send(result.newMemo);
   }
 });
