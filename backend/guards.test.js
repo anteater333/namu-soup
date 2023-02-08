@@ -38,12 +38,9 @@ function MemoSpamGuard로_한_키워드_안에서_이미_등록된_메모를_금
 
       const memo = "TEST";
 
-      db.setMemory(keyword.keyword, 0, "", memo, "127.0.0.1");
+      db.setMemory(keyword, 0, "", memo, "127.0.0.1");
 
-      const checkedResult = SameMemoGuard.checkMemoExists(
-        keyword.keyword,
-        memo
-      );
+      const checkedResult = SameMemoGuard.checkMemoExists(keyword, memo);
 
       assertTrue(checkedResult);
 
