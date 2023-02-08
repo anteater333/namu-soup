@@ -16,7 +16,7 @@ export function assertEquals(expected, actual) {
  * @param {any} data
  */
 export function assertExists(data) {
-  if (data) {
+  if (data !== undefined && data !== null) {
     console.log(`⭕ Test passed. ${data}`);
   } else {
     console.error(`❌ Test failed. ${data}`);
