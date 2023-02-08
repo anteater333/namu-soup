@@ -22,3 +22,14 @@ export function assertExists(data) {
     console.error(`❌ Test failed. ${data}`);
   }
 }
+
+/**
+ * 전달 받은 비교식의 값이 true인지 확인하는 assert 함수
+ */
+export function assertTrue(compExpr) {
+  if (compExpr === true) {
+    console.log(`⭕ Test passed. value: ${compExpr}`);
+  } else {
+    console.error(`❌ Test failed. value: ${compExpr}`);
+  }
+}
