@@ -45,7 +45,24 @@ function MemoList() {
 
   useEffect(() => {
     refreshList();
-  }, [keyword]);
+  }, [refreshList]);
+
+  // Catch ESC for disabling memo mode
+  useEffect(() => {
+    const keyDownHandler = (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+
+        setMemoMode(false);
+      }
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, []);
 
   const handleMemoButton = (memo, idx) => {
     setUuid(memo.uuid);
@@ -119,6 +136,7 @@ function MemoList() {
             onChange={(e) => {
               setSelectedMemo(e.target.value);
             }}
+            onKeyDown={handleSubmitButton}
           ></Form.Control>
           <div className="input-button-container">
             <div className="input-error-message">{memoError}</div>
