@@ -48,9 +48,9 @@ function MemoList() {
 
   const handleMemoButton = (memo, idx) => {
     setUuid(memo.uuid);
-    setSelectedMemo(memo.context);
+    setSelectedMemo(memo.context ? memo.context : "");
     setSelectedIdx(idx);
-    toggleMemoMode();
+    setMemoMode(!memoMode || idx !== selectedIdx);
   };
 
   const handleSubmitButton = async () => {
@@ -85,12 +85,11 @@ function MemoList() {
   let inputForm;
   if (memoMode) {
     inputForm = (
-      <div>
-        <div className="overlay" onClick={toggleMemoMode}></div>
+      <>
         <div className="input-form-container">
           <Form.Control
             className="input-form-control"
-            as="textarea"
+            as="input"
             value={selectedMemo}
             placeholder="짧고 간결하게 적어봅시다."
             onChange={(e) => {
@@ -98,6 +97,9 @@ function MemoList() {
             }}
           ></Form.Control>
           <div className="input-button-container">
+            <div className="input-length-counter">
+              {selectedMemo.length}/140
+            </div>
             <Button className="soup-button" onClick={handleSubmitButton}>
               기록
             </Button>
@@ -109,7 +111,7 @@ function MemoList() {
             </Button>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -152,7 +154,7 @@ function MemoList() {
       return (
         <ListGroupItem key={idx} as="li" className="list-item-container">
           <div className="memo-list-item list-item-text fw-bold">
-            <div className="empty-memo-text">{`< 빈 메모 슬롯 >`}</div>
+            <div className="empty-memo-text">{`< 빈 기록 슬롯 >`}</div>
           </div>
           {memoButton}
         </ListGroupItem>
@@ -176,7 +178,6 @@ function MemoList() {
     <div className="list-container">
       {errorMessage}
       {spinner}
-      {inputForm}
       <ListGroup as="ol">{listItem}</ListGroup>
       <a
         href={"https://namu.wiki/w/" + keyword}
@@ -185,7 +186,13 @@ function MemoList() {
       >
         <div className="current-keyword">{keyword}</div>
       </a>
-      <div className="crawled-at">기준 시각 : {crawledAt}</div>
+      {memoMode ? (
+        inputForm
+      ) : (
+        <>
+          <div className="crawled-at">기준 시각 : {crawledAt}</div>
+        </>
+      )}
     </div>
   );
 }

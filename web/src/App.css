@@ -83,6 +83,7 @@ a:hover {
 }
 
 .crawled-at {
+  margin-top: 1em;
   text-align: center;
 }
 
@@ -91,19 +92,47 @@ a:hover {
   height: 7.5vh;
   align-content: center;
   align-items: center;
+  justify-content: space-between;
 }
 
 .list-item-index {
   width: 2vh;
   text-align: right;
+  margin-right: 0.5em;
 }
 
 .list-item-text {
   flex: 10;
-  margin-left: 2.5vh;
+  max-width: 77.5%;
+}
+
+.list-item-button,
+.list-item:focus,
+.list-item-button:visited {
+  display: flex;
+
+  margin-left: 1em;
+  flex: 1;
+
+  max-width: 12.5%;
+
+  align-self: auto;
+  height: 100%;
+
+  float: right;
+}
+
+.list-item-button:hover,
+.list-item-button:active,
+.list-item-button:target {
+  background-color: #614d42;
+  border: none;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .soup-button,
+.soup-button:focus,
 .soup-button:visited {
   background-color: #00a495;
   border: none;
@@ -116,30 +145,11 @@ a:hover {
 .soup-button-reject,
 .soup-button:hover,
 .soup-button:active,
-.soup-button:focus,
 .soup-button:target {
   background-color: #614d42;
   border: none;
-  outline: none;
-  box-shadow: none;
-}
-
-.list-item-button,
-.list-item-button:visited {
-  display: flex;
-  width: 7.5vh;
-  align-self: auto;
-  height: 100%;
-}
-
-.list-item-button:hover,
-.list-item-button:active,
-.list-item-button:focus,
-.list-item-button:target {
-  background-color: #614d42;
-  border: none;
-  outline: none;
-  box-shadow: none;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .not-found-page {
@@ -157,14 +167,13 @@ a:hover {
 .memo-list-item {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-left: 0;
-  margin-right: 2.5vh;
 }
 
 .memo-text {
   flex: 2;
   display: -webkit-box;
-  line-height: 1.2;
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -176,6 +185,7 @@ a:hover {
 
 .last-writer {
   flex: 1;
+  padding-top: 0.25rem;
   font-size: 12px;
 }
 
@@ -183,6 +193,7 @@ a:hover {
   color: #999999;
 }
 
+/* // deprecated
 .overlay {
   position: fixed;
   top: 0;
@@ -195,20 +206,33 @@ a:hover {
   background-color: black;
   opacity: 0.8;
   z-index: 5;
-}
+} */
 
 .input-form-container {
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   z-index: 7;
   width: 100%;
-  height: 25vh;
+
   background-color: white;
+
+  border-radius: 0.25rem;
+  padding: 0.5rem;
 }
 
 .input-form-control {
   height: 100%;
   text-align: start;
+}
+
+.input-form-control:focus {
+  border-color: #008275;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.current-keyword-link {
+  z-index: 20;
 }
 
 .current-keyword {
@@ -222,7 +246,11 @@ a:hover {
   display: flex;
   margin-top: 0.5em;
   justify-content: right;
+  align-items: center;
 }
 .input-button-container > button {
   margin-left: 1em;
+}
+
+.input-length-counter {
 }
