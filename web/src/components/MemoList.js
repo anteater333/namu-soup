@@ -8,6 +8,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import moment from "moment";
 
 function MemoList() {
   // memos = [ { uuid, context, lastWriter } ], length = 10
@@ -139,7 +140,10 @@ function MemoList() {
         >
           <div className="memo-list-item list-item-text fw-bold">
             <div className="memo-text">{memo.context}</div>
-            <div className="last-writer">{memo.lastWriter}</div>
+            <div className="last-writer">
+              {memo.lastWriter} -{" "}
+              {moment(memo.memoAt).format("yyyy-MM-DD hh:mm:ss")}
+            </div>
           </div>
           {memoButton}
         </ListGroupItem>
