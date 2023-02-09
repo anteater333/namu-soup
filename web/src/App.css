@@ -94,6 +94,7 @@ a:hover {
 .list-item-container {
   display: flex;
   height: 7.5vh;
+  min-height: 70px;
   align-content: center;
   align-items: center;
   justify-content: space-between;
@@ -218,6 +219,7 @@ a:hover {
   max-width: 500px;
   min-width: 450px;
   height: 10.5vh;
+  min-height: 100px;
 
   background-color: white;
 
