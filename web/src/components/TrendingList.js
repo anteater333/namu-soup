@@ -66,10 +66,7 @@ function TrendingList() {
   if (error) {
     errorMessage = (
       <div className="error-page">
-        <span className="error-message">
-          오류가 발생했습니다. <p />
-          개발자에게 연락해주세요.
-        </span>
+        <span className="error-message">서버에 접속할 수 없습니다.</span>
       </div>
     );
   }

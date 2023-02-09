@@ -18,8 +18,12 @@ a:hover {
 }
 
 .App {
-  position: relative;
-  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+
+  align-items: center;
+
   margin: auto;
 }
 
@@ -209,10 +213,11 @@ a:hover {
 } */
 
 .input-form-container {
-  /* position: absolute; */
-  bottom: 0;
   z-index: 7;
   width: 100%;
+  max-width: 500px;
+  min-width: 450px;
+  height: 10.5vh;
 
   background-color: white;
 
@@ -221,7 +226,6 @@ a:hover {
 }
 
 .input-form-control {
-  height: 100%;
   text-align: start;
 }
 
@@ -253,4 +257,29 @@ a:hover {
 }
 
 .input-length-counter {
+  margin-left: 0.5em;
+}
+
+.input-error-message {
+  flex: 1;
+  padding-left: 0.75rem;
+  color: #ff0000;
+}
+
+.memo-list-scene {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.memo-list-scene-side {
+  display: flex;
+}
+
+.memo-list-scene .list-container {
+  margin: 0 0.5em;
+}
+
+.list-container {
+  max-width: 500px;
+  min-width: 500px;
 }
