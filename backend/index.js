@@ -17,6 +17,8 @@ db.initMemory();
 const app = express();
 const port = process.env.PORT || 8080;
 
+app.set("trust proxy", true);
+
 app.use(cors({ origin: "*" }));
 
 app.use(bodyParser.json());
