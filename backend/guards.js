@@ -12,7 +12,7 @@ export class SameUserGuard {
    */
   static _blacklist = {};
 
-  static _period = 30000; // Blacklist 등록 유효 기간 30초
+  static _period = 5000; // Blacklist 등록 유효 기간 5초
 
   static checkUserRegistered(user) {
     return (

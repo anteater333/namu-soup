@@ -105,7 +105,7 @@ app.post("/api/:keyword", (req, res) => {
   } else if (result.msg == `badSlotNumber`) {
     res.status(400).send({ msg: "Undesirable memo slot number" });
   } else if (result.msg == `thatWasClose`) {
-    res.status(409).send({ msg: "Key not matches. late or bad access" });
+    res.status(410).send({ msg: "Key not matches. late or bad access" });
   } else if (result.msg == `memoTooLong`) {
     res.status(419).send({ msg: "Memo too long." });
   } else if (result.msg == `done`) {
