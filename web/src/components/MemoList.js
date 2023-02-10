@@ -5,10 +5,11 @@ import {
   Form,
   ListGroup,
   ListGroupItem,
-  Spinner,
+  Placeholder,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import { getRandomInt, placeholderData } from "../utils/random";
 
 function MemoList() {
   // memos = [ { uuid, context, lastWriter } ], length = 10
@@ -165,52 +166,63 @@ function MemoList() {
     );
   }
 
-  let spinner;
-  if (loading) {
-    spinner = (
-      <div className="load-spinner-container">
-        <Spinner className="load-spinner" animation="grow" />
-      </div>
-    );
-  }
-
-  const listItem = memos.map((memo, idx) => {
-    const memoButton = (
-      <Button
-        className="soup-button list-item-button fw-bold"
-        onClick={() => handleMemoButton(memo, idx)}
-      >
-        기록
-      </Button>
-    );
-    if (memo.context) {
-      return (
-        <ListGroupItem
-          key={memo.uuid}
-          as="li"
-          className="memo-list-item-container list-item-container"
-        >
-          <div className="memo-list-item list-item-text fw-bold">
-            <div className="memo-text">{memo.context}</div>
-            <div className="last-writer">
-              {memo.lastWriter} -{" "}
-              {moment(memo.memoAt).format("yyyy-MM-DD hh:mm:ss")}
+  const listItem = loading
+    ? placeholderData.map((idx) => {
+        const phLen = getRandomInt(1, 10);
+        return (
+          <ListGroupItem
+            key={idx}
+            as="li"
+            className="memo-list-item-container list-item-container"
+          >
+            <div className="memo-list-item list-item-text fw-bold">
+              <Placeholder animation="glow" xs={9}>
+                <Placeholder xs={phLen} bg="success" />
+              </Placeholder>
             </div>
-          </div>
-          {memoButton}
-        </ListGroupItem>
-      );
-    } else {
-      return (
-        <ListGroupItem key={idx} as="li" className="list-item-container">
-          <div className="memo-list-item list-item-text fw-bold">
-            <div className="empty-memo-text">{`< 빈 기록 슬롯 >`}</div>
-          </div>
-          {memoButton}
-        </ListGroupItem>
-      );
-    }
-  });
+            <Button className="soup-button list-item-button fw-bold">
+              기록
+            </Button>
+          </ListGroupItem>
+        );
+      })
+    : memos.map((memo, idx) => {
+        const memoButton = (
+          <Button
+            className="soup-button list-item-button fw-bold"
+            onClick={() => handleMemoButton(memo, idx)}
+          >
+            기록
+          </Button>
+        );
+        if (memo.context) {
+          return (
+            <ListGroupItem
+              key={memo.uuid}
+              as="li"
+              className="memo-list-item-container list-item-container"
+            >
+              <div className="memo-list-item list-item-text fw-bold">
+                <div className="memo-text">{memo.context}</div>
+                <div className="last-writer">
+                  {memo.lastWriter} -{" "}
+                  {moment(memo.memoAt).format("yyyy-MM-DD hh:mm:ss")}
+                </div>
+              </div>
+              {memoButton}
+            </ListGroupItem>
+          );
+        } else {
+          return (
+            <ListGroupItem key={idx} as="li" className="list-item-container">
+              <div className="memo-list-item list-item-text fw-bold">
+                <div className="empty-memo-text">{`< 빈 기록 슬롯 >`}</div>
+              </div>
+              {memoButton}
+            </ListGroupItem>
+          );
+        }
+      });
 
   let errorMessage;
   if (error) {
@@ -226,7 +238,6 @@ function MemoList() {
       <div></div>
       <div className="list-container">
         {errorMessage}
-        {spinner}
         <ListGroup as="ol">{listItem}</ListGroup>
         <a
           href={"https://namu.wiki/w/" + keyword}

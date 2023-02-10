@@ -46,6 +46,8 @@ a:hover {
   font-weight: bold;
 }
 
+/* 
+// deprecated
 .load-spinner-container {
   position: fixed;
   top: 0;
@@ -58,7 +60,7 @@ a:hover {
   background-color: black;
   opacity: 0.8;
   z-index: 10;
-}
+} */
 
 .load-spinner {
   color: #008275;
