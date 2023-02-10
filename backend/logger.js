@@ -4,7 +4,7 @@ import winstonDaily from "winston-daily-rotate-file";
 import morgan from "morgan";
 
 const morganCombined =
-  ':remote-addr - :remote-user ":method :url HTTP/:http-version" :status :res[content-length] ":refferrer" ":user-agent"';
+  ':remote-addr - :remote-user ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 const morganFormat =
   process.env.NODE_ENV !== "production" ? "dev" : morganCombined;
 
