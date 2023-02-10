@@ -24,7 +24,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<TrendingList />} />
-        <Route path="/m/:keyword" element={<MemoList />} />
+        <Route path="/m/*" element={<MemoList />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

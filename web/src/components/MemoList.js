@@ -22,7 +22,8 @@ function MemoList() {
   const [selectedIdx, setSelectedIdx] = useState(-1);
   const [uuid, setUuid] = useState("");
 
-  const keyword = useParams().keyword;
+  // ref. https://reactrouter.com/en/main/route/route#splats
+  const { "*": keyword } = useParams();
 
   const refreshList = useCallback(async () => {
     setLoading(true);
@@ -34,10 +35,10 @@ function MemoList() {
       } else {
         // 404 - 해당 키워드는 현재 서버에 저장된 실검 목록에 존재하지 않음
         // eslint-disable-next-line no-restricted-globals
-        location.href = "/namu-soup";
+        // location.href = "/namu-soup";
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setError(error);
     }
     setLoading(false);
@@ -136,7 +137,12 @@ function MemoList() {
             onChange={(e) => {
               setSelectedMemo(e.target.value);
             }}
-            onKeyDown={handleSubmitButton}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSubmitButton();
+              }
+            }}
           ></Form.Control>
           <div className="input-button-container">
             <div className="input-error-message">{memoError}</div>

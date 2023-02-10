@@ -1,5 +1,5 @@
 import api from "../api/index";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button, ListGroup, ListGroupItem, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -9,21 +9,21 @@ function TrendingList() {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const refreshList = async () => {
-      setLoading(true);
-      try {
-        const result = await api.getTrendingList();
-        setTrendings(result[0]);
-        setCrawledAt(result[1]);
-      } catch (error) {
-        setError(error);
-      }
-      setLoading(false);
-    };
-
-    refreshList();
+  const refreshList = useCallback(async () => {
+    setLoading(true);
+    try {
+      const result = await api.getTrendingList();
+      setTrendings(result[0]);
+      setCrawledAt(result[1]);
+    } catch (error) {
+      setError(error);
+    }
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    refreshList();
+  }, [refreshList]);
 
   let spinner;
   if (loading) {
@@ -53,7 +53,7 @@ function TrendingList() {
 
         <Button
           as={Link}
-          to={`/m/${trending.keyword}`}
+          to={`/m/${encodeURI(trending.keyword)}`}
           className="soup-button list-item-button fw-bold"
         >
           기록
