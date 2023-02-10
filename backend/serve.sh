@@ -1,3 +1,2 @@
-NODE_ENV=production forever start index.js
-forever list
+NODE_ENV=production forever -s start index.js
 
