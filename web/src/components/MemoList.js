@@ -66,6 +66,12 @@ function MemoList() {
     };
   }, []);
 
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      window.scrollTo(0, memoMode ? document.body.scrollHeight : 0);
+    }
+  }, [memoMode]);
+
   const handleMemoButton = (memo, idx) => {
     setUuid(memo.uuid);
     setSelectedMemo(memo.context ? memo.context : "");
@@ -151,15 +157,17 @@ function MemoList() {
             <div className="input-length-counter">
               {selectedMemo.length}/140
             </div>
-            <Button className="soup-button" onClick={handleSubmitButton}>
-              기록
-            </Button>
-            <Button
-              className="soup-button soup-button-reject"
-              onClick={toggleMemoMode}
-            >
-              닫기
-            </Button>
+            <div className="input-button-inner-container">
+              <Button className="soup-button" onClick={handleSubmitButton}>
+                기록
+              </Button>
+              <Button
+                className="soup-button soup-button-reject"
+                onClick={toggleMemoMode}
+              >
+                닫기
+              </Button>
+            </div>
           </div>
         </div>
       </>

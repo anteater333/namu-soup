@@ -33,7 +33,7 @@ function TrendingList() {
           <ListGroupItem key={idx} as="li" className="list-item-container">
             <div className="list-item-index">{idx + 1}</div>
 
-            <Placeholder animation="glow" xs={9}>
+            <Placeholder animation="glow" xs={8}>
               <Placeholder xs={phLen} bg="success" />
             </Placeholder>
 

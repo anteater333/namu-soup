@@ -20,7 +20,7 @@ a:hover {
 .App {
   display: flex;
   flex-direction: column;
-  min-width: 500px;
+  /* min-width: 360px; */
 
   align-items: center;
 
@@ -38,11 +38,11 @@ a:hover {
 }
 
 .header-title {
-  font-size: 72px;
+  /* font-size: 72px; */
 }
 
 .header-context {
-  font-size: 18px;
+  font-size: 1.25em;
   font-weight: bold;
 }
 
@@ -217,7 +217,6 @@ a:hover {
 } */
 
 .input-form-container {
-  z-index: 7;
   width: 100%;
   max-width: 500px;
   min-width: 450px;
@@ -257,8 +256,11 @@ a:hover {
   justify-content: right;
   align-items: center;
 }
-.input-button-container > button {
-  margin-left: 1em;
+.input-button-inner-container > button:first-child {
+  margin-right: 0.5em;
+}
+.input-button-inner-container {
+  margin-left: 0.5em;
 }
 
 .input-length-counter {
@@ -287,4 +289,49 @@ a:hover {
 .list-container {
   max-width: 500px;
   min-width: 500px;
+}
+
+@media (max-width: 800px) {
+  .header-context {
+    font-size: 0.8em;
+  }
+
+  .list-container {
+    min-width: 300px;
+  }
+
+  .list-item-button {
+    max-width: 20%;
+    flex: 2;
+
+    font-size: 0.9em;
+  }
+
+  .list-item-container {
+    height: 6vh;
+  }
+
+  .list-item-text {
+    font-size: 0.9em;
+  }
+
+  .memo-list-scene {
+    grid-template-columns: none;
+  }
+
+  .input-form-container {
+    height: auto;
+    margin-top: 1em;
+    max-width: 300px;
+    min-width: 300px;
+  }
+
+  .input-button-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+  .input-button-container > * {
+    margin-top: 0.25em;
+  }
 }
