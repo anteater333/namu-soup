@@ -1,16 +1,10 @@
-<style>
-  img {
-    border-radius: .5em;
-  }
-</style>
-
 <h1 align="center">숲Soup - 나무위키 인기 검색어</h1>
 <h3 align="center">"바쁜 현대사회, 가끔은 나무 대신 숲을 봐야 할 때도 있습니다."</h3>
 
 <br/>
 
 <p align="center">
-  <img src="images/s1.png" alt="s1" />
+  <img style="border-radius: .5em;" src="images/s1.png" alt="s1" />
 </p>
 
 **[숲](https://blog.anteater-lab.link/namu-soup/)** 은 한국어 위키 사이트 [나무위키](https://namu.wiki/)의 실시간 검색어를 빠르게 확인할 수 있고, 왜 지금 이슈가 되고 있는지 모두가 함께 메모할 수 있는 웹 사이트입니다.
