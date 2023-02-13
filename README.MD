@@ -11,7 +11,7 @@
 
 <br/>
 
-<h1 align="center">🔔</h1>
+<h1 align="left">🔔</h1>
 
 - 숲이 제공하는 실시간 검색어는 나무위키와 실시간으로 동기화 되지 않습니다.
   - 실시간 검색어는 약 30분 간격으로 서버에 업데이트 됩니다.
@@ -29,12 +29,6 @@
 
 <br/>
 
-<h1 align="center">Contacts</h1>
-
-<h2 align="center">Github</h2>
-
-<p align="center"><a href="https://github.com/anteater333">https://github.com/anteater333</a></p>
-
-<h2 align="center">Mail</h2>
-
-<p align="center"><a href="mailto:anteater1056@gmail.com">anteater1056@gmail.com</a></p>
+<h1 align="left">Contacts</h1>
+<p align="left"><a href="https://github.com/anteater333">https://github.com/anteater333</a></p>
+<p align="left"><a href="mailto:anteater1056@gmail.com">anteater1056@gmail.com</a></p>
