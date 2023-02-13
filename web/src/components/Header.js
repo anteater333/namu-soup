@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Header() {
   const [headerText, setHeaderText] = useState(
-    "바쁜 현대사회, 가끔씩은 나무 대신 숲을 봐야 할 때도 있습니다."
+    "바쁜 현대사회, 가끔은 나무 대신 숲을 봐야 할 때도 있습니다."
   );
 
   return (
