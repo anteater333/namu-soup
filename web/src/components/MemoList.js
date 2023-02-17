@@ -36,7 +36,7 @@ function MemoList() {
       } else {
         // 404 - 해당 키워드는 현재 서버에 저장된 실검 목록에 존재하지 않음
         // eslint-disable-next-line no-restricted-globals
-        // location.href = "/namu-soup";
+        location.href = "/namu-soup";
       }
     } catch (error) {
       console.error(error);
