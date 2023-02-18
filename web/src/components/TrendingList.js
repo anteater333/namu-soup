@@ -62,7 +62,7 @@ function TrendingList() {
 
             <Button
               as={Link}
-              to={`/m/${encodeURI(trending.keyword)}`}
+              to={`/m/${trending.keyword}`}
               className="soup-button list-item-button fw-bold"
             >
               기록
