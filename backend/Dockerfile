@@ -6,22 +6,18 @@ RUN \
   apt install -y git
 
 # clone server code
-WORKDIR /usr/src/app
-RUN git clone https://github.com/anteater333/namu-soup.git
-WORKDIR /usr/src/app/namu-soup/backend
-
+WORKDIR /usr/src/backend
+COPY package*.json ./
 RUN npm install
+COPY . .
 
 ENV PORT=$port
 
 EXPOSE $PORT
 EXPOSE 8080
 
-COPY .env ./.env
-COPY entrypoint.sh ./entrypoint.sh
+RUN mkdir ./logs
 
-RUN mkdir /logs
+VOLUME [ "/usr/src/backend/logs" ]
 
-VOLUME [ "/logs" ]
-
-ENTRYPOINT ["bash", "./entrypoint.sh"]
+CMD [ "npm", "run", "start:prod" ]

@@ -149,7 +149,11 @@ app.delete("/api/:keyword/:memoSlot", (req, res) => {
   return res.status(200).send(deletedResult[1]);
 });
 
-app.listen(port, "127.0.0.1", () => {
-  logger.info(`Server time : ${new Date().toString()}`);
-  logger.info(`Server listening on port ${port}`);
-});
+app.listen(
+  port,
+  process.env.NODE_ENV !== "production" ? "127.0.0.1" : "0.0.0.0",
+  () => {
+    logger.info(`Server time : ${new Date().toString()}`);
+    logger.info(`Server listening on port ${port}`);
+  }
+);

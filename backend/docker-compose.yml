@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  api:
+    container_name: api_server
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./logs:/usr/src/backend/logs"
