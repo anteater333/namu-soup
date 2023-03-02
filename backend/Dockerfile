@@ -1,18 +1,14 @@
-FROM selenium/standalone-firefox
+FROM node:18
 
 # install git
 RUN \
-  sudo apt update && \
-  sudo apt install -y git
-
-# install node
-RUN curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash - && \
-  sudo apt-get install -y nodejs
+  apt update && \
+  apt install -y git
 
 # clone server code
-WORKDIR /home/seluser
+WORKDIR /usr/src/app
 RUN git clone https://github.com/anteater333/namu-soup.git
-WORKDIR /home/seluser/namu-soup/crawler
+WORKDIR /usr/src/app/namu-soup/backend
 
 RUN npm install
 
@@ -21,6 +17,11 @@ ENV PORT=$port
 EXPOSE $PORT
 EXPOSE 8080
 
+COPY .env ./.env
 COPY entrypoint.sh ./entrypoint.sh
+
+RUN mkdir /logs
+
+VOLUME [ "/logs" ]
 
 ENTRYPOINT ["bash", "./entrypoint.sh"]
