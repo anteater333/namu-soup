@@ -4,12 +4,6 @@ object-assign
 @license MIT
 */
 
-/*!
-  Copyright (c) 2018 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-
 /**
  * React Router DOM v6.2.2
  *
@@ -67,5 +61,3 @@ object-assign
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-//! moment.js
