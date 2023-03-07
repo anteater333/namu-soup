@@ -4,12 +4,18 @@ import "./App.css";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import TrendingList from "./components/TrendingList";
-import MemoList from "./components/MemoList";
-import NotFoundPage from "./components/NotFoundPage";
-
 import { Route, Routes } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { lazy, Suspense } from "react";
+
+const TrendingList = lazy(() => import("./components/TrendingList"));
+const MemoList = lazy(() => import("./components/MemoList"));
+const NotFoundPage = lazy(() => import("./components/NotFoundPage"));
+
+// Deprecated. 학습 목적으로 남겨둠
+// import TrendingList from "./components/TrendingList";
+// import MemoList from "./components/MemoList";
+// import NotFoundPage from "./components/NotFoundPage";
 
 function App() {
   return (
@@ -23,11 +29,13 @@ function App() {
         <meta property="og:title" content="숲Soup - 나무위키 인기 검색어" />
       </Helmet>
       <Header />
-      <Routes>
-        <Route path="/" element={<TrendingList />} />
-        <Route path="/m/*" element={<MemoList />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Suspense fallback={<div></div>}>
+        <Routes>
+          <Route path="/" element={<TrendingList />} />
+          <Route path="/m/*" element={<MemoList />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </div>
   );
