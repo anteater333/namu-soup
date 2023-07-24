@@ -9,7 +9,9 @@ import {
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import "moment-timezone";
 import { getRandomInt, placeholderData } from "../utils/random";
+import { UTCStrToKSTStr } from "../utils/timezone";
 
 function MemoList() {
   // memos = [ { uuid, context, lastWriter } ], length = 10
@@ -32,7 +34,7 @@ function MemoList() {
       const result = await api.getMemoList(keyword);
       if (result) {
         setMemos(result[0]);
-        setCrawledAt(result[1]);
+        setCrawledAt(UTCStrToKSTStr(result[1]));
       } else {
         // 404 - 해당 키워드는 현재 서버에 저장된 실검 목록에 존재하지 않음
         // eslint-disable-next-line no-restricted-globals
@@ -214,7 +216,9 @@ function MemoList() {
                 <div className="memo-text">{memo.context}</div>
                 <div className="last-writer">
                   {memo.lastWriter} -{" "}
-                  {moment(memo.memoAt).format("yyyy-MM-DD hh:mm:ss")}
+                  {moment(memo.memoAt)
+                    .tz("Asia/Seoul")
+                    .format("yyyy-MM-DD hh:mm:ss z")}
                 </div>
               </div>
               {memoButton}

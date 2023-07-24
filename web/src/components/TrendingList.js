@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Button, ListGroup, ListGroupItem, Placeholder } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getRandomInt, placeholderData } from "../utils/random";
+import { UTCStrToKSTStr } from "../utils/timezone";
 
 function TrendingList() {
   const [trendings, setTrendings] = useState([]);
@@ -15,7 +16,7 @@ function TrendingList() {
     try {
       const result = await api.getTrendingList();
       setTrendings(result[0]);
-      setCrawledAt(result[1]);
+      setCrawledAt(UTCStrToKSTStr(result[1]));
     } catch (error) {
       setError(error);
     }
