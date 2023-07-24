@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/namu-soup/static/css/main.db5d2b7d.css",
-    "main.js": "/namu-soup/static/js/main.7c5c6dec.js",
-    "static/js/907.b7d8e0d3.chunk.js": "/namu-soup/static/js/907.b7d8e0d3.chunk.js",
-    "static/js/518.02ee1b60.chunk.js": "/namu-soup/static/js/518.02ee1b60.chunk.js",
+    "main.js": "/namu-soup/static/js/main.6c530147.js",
+    "static/js/907.a7591153.chunk.js": "/namu-soup/static/js/907.a7591153.chunk.js",
+    "static/js/518.36c91e9d.chunk.js": "/namu-soup/static/js/518.36c91e9d.chunk.js",
     "static/js/982.22cbaa4c.chunk.js": "/namu-soup/static/js/982.22cbaa4c.chunk.js",
     "static/js/787.5fbdf94a.chunk.js": "/namu-soup/static/js/787.5fbdf94a.chunk.js",
-    "static/js/703.982ac1cb.chunk.js": "/namu-soup/static/js/703.982ac1cb.chunk.js",
-    "static/js/656.1cf8cac1.chunk.js": "/namu-soup/static/js/656.1cf8cac1.chunk.js",
+    "static/js/368.1e12eeeb.chunk.js": "/namu-soup/static/js/368.1e12eeeb.chunk.js",
+    "static/js/114.d4190b89.chunk.js": "/namu-soup/static/js/114.d4190b89.chunk.js",
     "static/media/github-mark.svg": "/namu-soup/static/media/github-mark.6fa18895f6e6c7772cab7049f7e05f59.svg",
     "index.html": "/namu-soup/index.html",
     "main.db5d2b7d.css.map": "/namu-soup/static/css/main.db5d2b7d.css.map",
-    "main.7c5c6dec.js.map": "/namu-soup/static/js/main.7c5c6dec.js.map",
-    "907.b7d8e0d3.chunk.js.map": "/namu-soup/static/js/907.b7d8e0d3.chunk.js.map",
-    "518.02ee1b60.chunk.js.map": "/namu-soup/static/js/518.02ee1b60.chunk.js.map",
+    "main.6c530147.js.map": "/namu-soup/static/js/main.6c530147.js.map",
+    "907.a7591153.chunk.js.map": "/namu-soup/static/js/907.a7591153.chunk.js.map",
+    "518.36c91e9d.chunk.js.map": "/namu-soup/static/js/518.36c91e9d.chunk.js.map",
     "982.22cbaa4c.chunk.js.map": "/namu-soup/static/js/982.22cbaa4c.chunk.js.map",
     "787.5fbdf94a.chunk.js.map": "/namu-soup/static/js/787.5fbdf94a.chunk.js.map",
-    "703.982ac1cb.chunk.js.map": "/namu-soup/static/js/703.982ac1cb.chunk.js.map",
-    "656.1cf8cac1.chunk.js.map": "/namu-soup/static/js/656.1cf8cac1.chunk.js.map"
+    "368.1e12eeeb.chunk.js.map": "/namu-soup/static/js/368.1e12eeeb.chunk.js.map",
+    "114.d4190b89.chunk.js.map": "/namu-soup/static/js/114.d4190b89.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.db5d2b7d.css",
-    "static/js/main.7c5c6dec.js"
+    "static/js/main.6c530147.js"
   ]
 }
