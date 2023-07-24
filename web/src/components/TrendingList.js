@@ -4,6 +4,7 @@ import { Button, ListGroup, ListGroupItem, Placeholder } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getRandomInt, placeholderData } from "../utils/random";
 import { UTCStrToKSTStr } from "../utils/timezone";
+import { Helmet } from "react-helmet-async";
 
 function TrendingList() {
   const [trendings, setTrendings] = useState([]);
@@ -82,11 +83,27 @@ function TrendingList() {
   }
 
   return (
-    <div className="list-container">
-      {errorMessage}
-      <ListGroup as="ol">{listItem}</ListGroup>
-      <div className="crawled-at">기준 시각 : {crawledAt}</div>
-    </div>
+    <>
+      <Helmet>
+        <title>숲Soup - 나무위키 인기 검색어</title>
+        <meta
+          name="description"
+          content={`숲, 나무위키 인기 검색어, ${trendings
+            .map((t) => t.keyword)
+            .join(", ")}`}
+        />
+        <meta
+          name="keywords"
+          content="namu, wiki, 숲, 나무위키, 인기, 검색어"
+        />
+        <meta property="og:title" content="숲Soup - 나무위키 인기 검색어" />
+      </Helmet>
+      <div className="list-container">
+        {errorMessage}
+        <ListGroup as="ol">{listItem}</ListGroup>
+        <div className="crawled-at">기준 시각 : {crawledAt}</div>
+      </div>
+    </>
   );
 }
 

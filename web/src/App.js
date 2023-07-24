@@ -5,8 +5,8 @@ import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Route, Routes } from "react-router-dom";
-import { Helmet } from "react-helmet";
 import { lazy, Suspense } from "react";
+import { Helmet } from "react-helmet-async";
 
 const TrendingList = lazy(() => import("./components/TrendingList"));
 const MemoList = lazy(() => import("./components/MemoList"));
@@ -20,14 +20,6 @@ const NotFoundPage = lazy(() => import("./components/NotFoundPage"));
 function App() {
   return (
     <div className="App">
-      <Helmet>
-        <meta name="description" content="숲, 나무위키 인기 검색어" />
-        <meta
-          name="keywords"
-          content="namu, wiki, 숲, 나무위키, 인기, 검색어"
-        />
-        <meta property="og:title" content="숲Soup - 나무위키 인기 검색어" />
-      </Helmet>
       <Header />
       <Suspense fallback={<div></div>}>
         <Routes>

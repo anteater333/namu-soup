@@ -12,6 +12,7 @@ import moment from "moment";
 import "moment-timezone";
 import { getRandomInt, placeholderData } from "../utils/random";
 import { UTCStrToKSTStr } from "../utils/timezone";
+import { Helmet } from "react-helmet-async";
 
 function MemoList() {
   // memos = [ { uuid, context, lastWriter } ], length = 10
@@ -246,22 +247,36 @@ function MemoList() {
   }
 
   return (
-    <div className="memo-list-scene">
-      <div></div>
-      <div className="list-container">
-        {errorMessage}
-        <ListGroup as="ol">{listItem}</ListGroup>
-        <a
-          href={"https://namu.wiki/w/" + keyword}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <div className="current-keyword">{keyword}</div>
-        </a>
-        <div className="crawled-at">기준 시각 : {crawledAt}</div>
+    <>
+      <Helmet>
+        <title>숲Soup - {keyword}</title>
+        <meta
+          name="description"
+          content={`나무위키 ${keyword}, 숲Soup - 나무위키 인기 검색어`}
+        />
+        <meta
+          name="keywords"
+          content={`namu, wiki, 숲, 나무위키, 인기, 검색어, ${keyword}`}
+        />
+        <meta property="og:title" content={`숲Soup - ${keyword}`} />
+      </Helmet>
+      <div className="memo-list-scene">
+        <div></div>
+        <div className="list-container">
+          {errorMessage}
+          <ListGroup as="ol">{listItem}</ListGroup>
+          <a
+            href={"https://namu.wiki/w/" + keyword}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="current-keyword">{keyword}</div>
+          </a>
+          <div className="crawled-at">기준 시각 : {crawledAt}</div>
+        </div>
+        <div className="memo-list-scene-side">{inputForm}</div>
       </div>
-      <div className="memo-list-scene-side">{inputForm}</div>
-    </div>
+    </>
   );
 }
 
