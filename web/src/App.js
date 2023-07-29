@@ -6,7 +6,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import { Helmet } from "react-helmet-async";
 
 const TrendingList = lazy(() => import("./components/TrendingList"));
 const MemoList = lazy(() => import("./components/MemoList"));
