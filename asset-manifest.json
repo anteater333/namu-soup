@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/namu-soup/static/css/main.db5d2b7d.css",
-    "main.js": "/namu-soup/static/js/main.6c530147.js",
+    "main.js": "/namu-soup/static/js/main.e214d834.js",
     "static/js/907.a7591153.chunk.js": "/namu-soup/static/js/907.a7591153.chunk.js",
     "static/js/518.36c91e9d.chunk.js": "/namu-soup/static/js/518.36c91e9d.chunk.js",
     "static/js/982.22cbaa4c.chunk.js": "/namu-soup/static/js/982.22cbaa4c.chunk.js",
     "static/js/787.5fbdf94a.chunk.js": "/namu-soup/static/js/787.5fbdf94a.chunk.js",
     "static/js/368.1e12eeeb.chunk.js": "/namu-soup/static/js/368.1e12eeeb.chunk.js",
     "static/js/114.d4190b89.chunk.js": "/namu-soup/static/js/114.d4190b89.chunk.js",
-    "static/media/github-mark.svg": "/namu-soup/static/media/github-mark.6fa18895f6e6c7772cab7049f7e05f59.svg",
     "index.html": "/namu-soup/index.html",
+    "static/media/github-mark.svg": "/namu-soup/static/media/github-mark.6fa18895f6e6c7772cab7049f7e05f59.svg",
     "main.db5d2b7d.css.map": "/namu-soup/static/css/main.db5d2b7d.css.map",
-    "main.6c530147.js.map": "/namu-soup/static/js/main.6c530147.js.map",
+    "main.e214d834.js.map": "/namu-soup/static/js/main.e214d834.js.map",
     "907.a7591153.chunk.js.map": "/namu-soup/static/js/907.a7591153.chunk.js.map",
     "518.36c91e9d.chunk.js.map": "/namu-soup/static/js/518.36c91e9d.chunk.js.map",
     "982.22cbaa4c.chunk.js.map": "/namu-soup/static/js/982.22cbaa4c.chunk.js.map",
@@ -21,6 +21,6 @@
   },
   "entrypoints": [
     "static/css/main.db5d2b7d.css",
-    "static/js/main.6c530147.js"
+    "static/js/main.e214d834.js"
   ]
 }
