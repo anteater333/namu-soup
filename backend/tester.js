@@ -21,15 +21,13 @@ function walkDir(dir, callback) {
   });
 }
 
-function catchTestModule(filename) {
-  const pattern = /^[a-zA-Z0-9_\-.]+\.test\.(js|jsx)$/;
-  return new RegExp(pattern).test(filename);
-}
-
-walkDir(root, (filePath) => {
-  const basename = path.basename(filePath);
-  if (catchTestModule(basename)) {
-    console.log(basename);
-    // run test module.
+walkDir(root, async (filePath) => {
+  if (filePath.endsWith(".test.js")) {
+    const tests = await import(`${root}/${filePath}`);
+    Object.keys(tests).forEach((key) => {
+      const test = tests[key]();
+      // TBD : Not implemented yet
+      console.log(key);
+    });
   }
 });
