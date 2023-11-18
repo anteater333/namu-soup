@@ -12,4 +12,4 @@ function 십분_단위로_내림한_형식의_시간을_반환한다() {
   assertEquals(expected, limitedCurrentTime);
 }
 
-십분_단위로_내림한_형식의_시간을_반환한다();
+// 십분_단위로_내림한_형식의_시간을_반환한다();

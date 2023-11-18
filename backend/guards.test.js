@@ -2,7 +2,7 @@ import { assertEquals, assertTrue } from "./asserts.js";
 import { SameUserGuard, SameMemoGuard } from "./guards.js";
 import db from "./memory.js";
 
-const testCases = [
+export const tests = [
   function SameUserGuard로_사용자를_블랙리스트에_추가하고_일정_시간마다_삭제한다() {
     return new Promise((resolve, reject) => {
       // 테스트 환경에서 Blacklist 수명은 5초로 가정
@@ -44,27 +44,27 @@ const testCases = [
   },
 ];
 
-new Promise((resolve, reject) => {
-  resolve();
-})
-  .then(async () => {
-    let count = 1;
-    for await (const TC of testCases) {
-      try {
-        console.log(TC.name);
-        await TC();
+// new Promise((resolve, reject) => {
+//   resolve();
+// })
+//   .then(async () => {
+//     let count = 1;
+//     for await (const TC of testCases) {
+//       try {
+//         console.log(TC.name);
+//         await TC();
 
-        console.log(`Test Case #${count} Passed : `);
-        console.log(TC.name);
-      } catch (error) {
-        console.log(`Test Case #${count} Failed : `);
-        console.log(TC.name);
-        console.log(error);
-      }
-      count++;
-      console.log("============================");
-    }
-  })
-  .finally(() => {
-    console.log(`test ended - ${import.meta.url}`);
-  });
+//         console.log(`Test Case #${count} Passed : `);
+//         console.log(TC.name);
+//       } catch (error) {
+//         console.log(`Test Case #${count} Failed : `);
+//         console.log(TC.name);
+//         console.log(error);
+//       }
+//       count++;
+//       console.log("============================");
+//     }
+//   })
+//   .finally(() => {
+//     console.log(`test ended - ${import.meta.url}`);
+//   });
