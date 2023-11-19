@@ -43,28 +43,3 @@ export const tests = [
     });
   },
 ];
-
-// new Promise((resolve, reject) => {
-//   resolve();
-// })
-//   .then(async () => {
-//     let count = 1;
-//     for await (const TC of testCases) {
-//       try {
-//         console.log(TC.name);
-//         await TC();
-
-//         console.log(`Test Case #${count} Passed : `);
-//         console.log(TC.name);
-//       } catch (error) {
-//         console.log(`Test Case #${count} Failed : `);
-//         console.log(TC.name);
-//         console.log(error);
-//       }
-//       count++;
-//       console.log("============================");
-//     }
-//   })
-//   .finally(() => {
-//     console.log(`test ended - ${import.meta.url}`);
-//   });
