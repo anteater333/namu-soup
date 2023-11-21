@@ -3,7 +3,7 @@ import { SameUserGuard, SameMemoGuard } from "./guards.js";
 import db from "./memory.js";
 
 export const tests = [
-  function SameUserGuard로_사용자를_블랙리스트에_추가하고_일정_시간마다_삭제한다() {
+  async function SameUserGuard로_사용자를_블랙리스트에_추가하고_일정_시간마다_삭제한다() {
     return new Promise((resolve, reject) => {
       // 테스트 환경에서 Blacklist 수명은 5초로 가정
       SameUserGuard.setGlobalSameUserGuardPeriod(5000);
@@ -25,7 +25,7 @@ export const tests = [
       }, 6000);
     });
   },
-  function MemoSpamGuard로_한_키워드_안에서_이미_등록된_메모를_금지한다() {
+  async function MemoSpamGuard로_한_키워드_안에서_이미_등록된_메모를_금지한다() {
     return new Promise((resolve, reject) => {
       db.initMemory().then(() => {
         const keyword = db.getAllMemory()[0][0].keyword;

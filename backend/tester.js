@@ -4,7 +4,7 @@ import path, { join } from "path";
 console.log("SOUP BACKEND TEST RUNNER");
 console.log("Given argv: ");
 console.log(`${process.argv.join(", ")}`);
-console.log(`-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-`);
+console.log(`-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n`);
 
 const root = "./";
 
@@ -21,31 +21,43 @@ function walkDir(dir, callback) {
   });
 }
 
+let moduleCnt = 1;
 walkDir(root, async (filePath) => {
   if (filePath.endsWith(".test.js")) {
     const tests = (await import(`${root}/${filePath}`)).tests;
-    let count = 1;
-    console.log(`${filePath} == \n`);
+    const thisModuleId = moduleCnt++;
+    let tcCount = 1;
+    console.log(
+      "================================================================"
+    );
+    console.log(`Module #${thisModuleId} : ${filePath}`);
+    console.log(
+      "----------------------------------------------------------------"
+    );
     if (tests) {
-      tests.forEach(async (TC) => {
+      for (let i = 0; i < tests.length; i++) {
+        const TC = tests[i];
+        console.log(`Test Case #${tcCount} : ${TC.name}\n`);
         try {
-          console.log(TC.name);
           await TC();
 
-          console.log(`Test Case #${count} Passed : `);
-          console.log(TC.name);
+          console.log(`\nTest Case #${tcCount} done.`);
         } catch (error) {
-          console.log(`Test Case #${count} Failed : `);
-          console.log(TC.name);
+          console.log(`\nTest Case #${tcCount} FAILED with error.\n`);
           console.log(error);
         }
-        count++;
-        console.log("============================");
-      });
+        tcCount++;
+      }
     } else {
       console.log(`module passed, test not found.`);
     }
 
-    console.log("----------------------------");
+    console.log(
+      "----------------------------------------------------------------"
+    );
+    console.log(`Module #${thisModuleId} done.`);
+    console.log(
+      "================================================================\n"
+    );
   }
 });
