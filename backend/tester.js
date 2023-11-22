@@ -4,7 +4,9 @@ import { join } from "path";
 console.log("SOUP BACKEND TEST RUNNER");
 console.log("Given argv: ");
 console.log(`${process.argv.join(", ")}`);
-console.log(`-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n`);
+console.log(
+  `-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n`
+);
 
 const root = "./";
 
@@ -24,37 +26,45 @@ function walkDir(dir, callback) {
 async function executeTestModule(filePath, moduleId) {
   const tests = (await import(`${root}/${filePath}`)).tests;
   let tcCount = 1;
+  let passed = 0,
+    failed = 0;
   console.log(
-    "================================================================"
+    "================================================================="
   );
   console.log(`Module #${moduleId} : ${filePath}`);
   console.log(
-    "----------------------------------------------------------------"
+    "-----------------------------------------------------------------"
   );
   if (tests) {
     for (let i = 0; i < tests.length; i++) {
       const TC = tests[i];
-      console.log(`Test Case #${tcCount} : ${TC.name}\n`);
+      console.log(
+        `Test Case #${tcCount} (${tcCount}/${tests.length}) : ${TC.name}\n`
+      );
       try {
         await TC();
 
         console.log(`\nTest Case #${tcCount} done.`);
+        passed++;
       } catch (error) {
         console.log(`\nTest Case #${tcCount} FAILED with error.\n`);
         console.log(error);
+        failed++;
       }
       tcCount++;
       console.log(
-        "----------------------------------------------------------------"
+        `-----------------------------------------------------------------`
       );
     }
   } else {
     console.log(`module passed, test not found.`);
   }
 
-  console.log(`Module #${moduleId} done.`);
   console.log(
-    "================================================================\n"
+    `Module #${moduleId} done. (PASSED : ${passed}, FAILED : ${failed})`
+  );
+  console.log(
+    "=================================================================\n"
   );
 }
 
