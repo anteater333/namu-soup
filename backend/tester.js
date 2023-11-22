@@ -1,5 +1,5 @@
 import { readdirSync, statSync } from "fs";
-import path, { join } from "path";
+import { join } from "path";
 
 console.log("SOUP BACKEND TEST RUNNER");
 console.log("Given argv: ");

@@ -27,19 +27,21 @@ export const tests = [
   },
   async function MemoSpamGuard로_한_키워드_안에서_이미_등록된_메모를_금지한다() {
     return new Promise((resolve, reject) => {
-      db.initMemory().then(() => {
-        const keyword = db.getAllMemory()[0][0].keyword;
+      db.initMemory()
+        .then(() => {
+          const keyword = db.getAllMemory()[0][0].keyword;
 
-        const memo = "TEST";
+          const memo = "TEST";
 
-        db.setMemory(keyword, 0, "", memo, "127.0.0.1");
+          db.setMemory(keyword, 0, "", memo, "127.0.0.1");
 
-        const checkedResult = SameMemoGuard.checkMemoExists(keyword, memo);
+          const checkedResult = SameMemoGuard.checkMemoExists(keyword, memo);
 
-        assertTrue(checkedResult);
+          assertTrue(checkedResult);
 
-        resolve();
-      });
+          resolve();
+        })
+        .catch((error) => reject(error));
     });
   },
 ];

@@ -35,42 +35,59 @@ export const tests = [
   async function 삭제_함수를_실행_후_메모가_삭제된_것이_확인된다() {
     const dummyMemoString = "곧 삭제될 메모";
 
-    await db.initMemory().then(() => {
-      setTimeout(() => {
-        const currentFirstKeyword = db.getAllMemory()[0][0];
+    try {
+      await db
+        .initMemory()
+        .then(() => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              try {
+                const currentFirstKeyword = db.getAllMemory()[0][0];
 
-        const result = db.setMemory(
-          currentFirstKeyword.keyword,
-          0,
-          "",
-          dummyMemoString,
-          "127.0.0.1"
-        );
+                const result = db.setMemory(
+                  currentFirstKeyword.keyword,
+                  0,
+                  "",
+                  dummyMemoString,
+                  "127.0.0.1"
+                );
 
-        console.log(currentFirstKeyword.keyword);
-        console.log(currentFirstKeyword.memo[0]);
+                console.log(currentFirstKeyword.keyword);
+                console.log(currentFirstKeyword.memo[0]);
 
-        assertEquals("done", result.msg);
-        assertEquals(
-          JSON.stringify(currentFirstKeyword.memo[0]),
-          JSON.stringify(result.newMemo ? result.newMemo : {})
-        );
-        assertExists(currentFirstKeyword.memo[0].memoAt);
+                assertEquals("done", result.msg);
+                assertEquals(
+                  JSON.stringify(currentFirstKeyword.memo[0]),
+                  JSON.stringify(result.newMemo ? result.newMemo : {})
+                );
+                assertExists(currentFirstKeyword.memo[0].memoAt);
 
-        const deletedResult = db.clearMemorySlot(
-          currentFirstKeyword.keyword,
-          0
-        );
+                const deletedResult = db.clearMemorySlot(
+                  currentFirstKeyword.keyword,
+                  0
+                );
 
-        assertEquals(dummyMemoString, deletedResult[1].context);
+                assertEquals(dummyMemoString, deletedResult[1].context);
 
-        const resultFirstKeyword = db.getAllMemory()[0][0];
+                const resultFirstKeyword = db.getAllMemory()[0][0];
 
-        assertEquals(
-          JSON.stringify({}),
-          JSON.stringify(resultFirstKeyword.memo[0])
-        );
-      }, 1000);
-    });
+                assertEquals(
+                  JSON.stringify({}),
+                  JSON.stringify(resultFirstKeyword.memo[0])
+                );
+
+                resolve();
+              } catch (error) {
+                reject(error);
+              }
+            }, 1000);
+          });
+        })
+        .catch((error) => {
+          throw error;
+        });
+    } catch (error) {
+      throw error;
+    }
   },
 ];
