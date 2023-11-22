@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test node tester.js",
     "start": "NODE_ENV=dev node index.js",
     "start:dev": "NODE_ENV=dev node index.js",
     "start:prod": "NODE_ENV=production node index.js",

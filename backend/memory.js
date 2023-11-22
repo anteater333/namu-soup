@@ -28,7 +28,24 @@ const initMemory = async () => {
   try {
     const recoveryFileData = await fs.readFile(recoveryFilePath, "utf-8");
 
-    const [recoveredTrendingData, parsedAt] = JSON.parse(recoveryFileData);
+    const [recoveredTrendingData, parsedAt] = recoveryFileData
+      ? JSON.parse(recoveryFileData)
+      : [
+          // 복구용 파일에 데이터가 없을 때
+          [
+            "Placeholder1",
+            "Placeholder2",
+            "Placeholder3",
+            "Placeholder4",
+            "Placeholder5",
+            "Placeholder6",
+            "Placeholder7",
+            "Placeholder8",
+            "Placeholder9",
+            "Placeholder0",
+          ],
+          getLimitedCurrentTime(new Date()),
+        ];
 
     resetMemory(recoveredTrendingData, parsedAt);
   } catch (error) {
@@ -36,8 +53,10 @@ const initMemory = async () => {
       logger.warn(`could not found recovery file.`);
       logger.warn(`No trending data`);
     } else {
-      logger.error(`Unhandled file system error: ${error.code}`);
-      logger.error(error);
+      logger.error(
+        `Unhandled file system error: ${error.code ?? error.message}`
+      );
+      logger.error(error.stack);
     }
     logger.warn(`Failed to initiate trending database.`);
   }
