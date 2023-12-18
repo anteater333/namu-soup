@@ -292,7 +292,7 @@ a:hover {
 }
 
 .footer {
-  margin-top: 3em;
+  margin-top: 2em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 
@@ -305,6 +305,10 @@ a:hover {
 
   justify-content: flex-end;
   align-items: center;
+}
+
+.footer-hits {
+  margin-bottom: 1em;
 }
 
 .footer-gh-logo img {
