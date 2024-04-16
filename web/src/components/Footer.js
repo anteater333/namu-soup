@@ -3,10 +3,10 @@ import ghLogo from "../assets/github-mark.svg";
 function Footer() {
   return (
     <footer className="footer">
-      {process.env.REACT_APP_IS_DEV ? (
-        <div class="footer-hits">hit counter</div>
+      {process.env.REACT_APP_IS_DEV === "true" ? (
+        <div className="footer-hits">hit counter</div>
       ) : (
-        <div class="footer-hits">
+        <div className="footer-hits">
           <a href="https://hits.seeyoufarm.com">
             <img
               src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fblog.anteater-lab.link%2Fnamu-soup%2F&count_bg=%23614D42&title_bg=%23614D42&icon=&icon_color=%23E7E7E7&title=%EB%B0%A9%EB%AC%B8%EA%B0%9D%EB%93%A4&edge_flat=false"
