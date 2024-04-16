@@ -21,7 +21,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Suspense fallback={<div></div>}>
+      <Suspense
+        fallback={<div className="list-group suspense-placeholder"></div>}
+      >
         <Routes>
           <Route path="/" element={<TrendingList />} />
           <Route path="/m/*" element={<MemoList />} />
