@@ -2,6 +2,13 @@ html,
 body {
   height: 100%;
   background: linear-gradient(to right, #00a495, #13ad65);
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 #root {
