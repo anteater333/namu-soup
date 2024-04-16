@@ -323,7 +323,7 @@ a:hover {
   margin-bottom: 0.5em;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .header-context {
     font-size: 0.8em;
   }
@@ -354,7 +354,7 @@ a:hover {
   .input-form-container {
     height: auto;
     margin-top: 1em;
-    max-width: 300px;
+    max-width: 100%;
     min-width: 300px;
   }
 
