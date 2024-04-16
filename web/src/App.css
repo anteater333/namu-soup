@@ -367,3 +367,10 @@ a:hover {
     margin-top: 0.25em;
   }
 }
+
+.suspense-placeholder {
+  height: 700px;
+  width: 100%;
+  max-width: 500px;
+  background-color: white;
+}
