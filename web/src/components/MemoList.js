@@ -256,7 +256,7 @@ function MemoList() {
         />
         <meta
           name="keywords"
-          content={`namu, wiki, 숲, 나무위키, 인기, 검색어, ${keyword}`}
+          content={`namu, wiki, 숲, 나무위키, 인기, 검색어, 실검, 실시간 검색어, 실시간 인기 검색어, 나무위키 실검 알려주는 채널, ${keyword}`}
         />
         <meta property="og:title" content={`숲Soup - ${keyword}`} />
       </Helmet>
