@@ -85,18 +85,18 @@ function TrendingList() {
   return (
     <>
       <Helmet>
-        <title>숲Soup - 나무위키 인기 검색어</title>
+        <title>숲Soup - 나무위키 실시간 검색어</title>
         <meta
           name="description"
-          content={`숲, 나무위키 인기 검색어, ${trendings
+          content={`숲, 나무위키 실시간 검색어, ${trendings
             .map((t) => t.keyword)
             .join(", ")}`}
         />
         <meta
           name="keywords"
-          content="namu, wiki, 숲, 나무위키, 인기, 검색어, 실검, 실시간 검색어, 실시간 인기 검색어, 나무위키 실검 알려주는 채널"
+          content="namu, wiki, 숲, 나무위키, 인기, 검색어, 실검, 실시간 검색어, 실시간 인기 검색어, 나무위키 실검 알려주는 채널, 실검 채널"
         />
-        <meta property="og:title" content="숲Soup - 나무위키 인기 검색어" />
+        <meta property="og:title" content="숲Soup - 나무위키 실시간 검색어" />
       </Helmet>
       <div className="list-container">
         {errorMessage}
