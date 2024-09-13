@@ -55,7 +55,9 @@ function TrendingList() {
             <div className="list-item-index">{idx + 1}</div>
             <a
               className="list-item-text"
-              href={"https://namu.wiki/w/" + trending.keyword}
+              href={
+                "https://namu.wiki/w/" + encodeURIComponent(trending.keyword)
+              }
               target="_blank"
               rel="noreferrer"
             >
@@ -64,7 +66,7 @@ function TrendingList() {
 
             <Button
               as={Link}
-              to={`/m/${trending.keyword}`}
+              to={`/m/${encodeURIComponent(trending.keyword)}`}
               className="soup-button list-item-button fw-bold"
             >
               기록
