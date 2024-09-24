@@ -28,6 +28,7 @@ function App() {
           <Route path="/" element={<TrendingList />} />
           <Route path="/m/*" element={<MemoList />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/gwanlija" element={<></>} />
         </Routes>
       </Suspense>
       <Footer />
