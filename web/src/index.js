@@ -6,14 +6,21 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+/** React Query Client */
+const queryClient = new QueryClient();
+
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <BrowserRouter basename="/namu-soup">
     <HelmetProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </QueryClientProvider>
     </HelmetProvider>
   </BrowserRouter>
 );
