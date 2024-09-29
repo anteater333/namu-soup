@@ -1,5 +1,4 @@
 import api from "../api/index";
-import { useCallback, useEffect, useState } from "react";
 import { Button, ListGroup, ListGroupItem, Placeholder } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getRandomInt, placeholderData } from "../utils/random";

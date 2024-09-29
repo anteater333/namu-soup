@@ -8,7 +8,6 @@ const axiosClient = {
       const response = await axios.get(API_URL);
       return response.data;
     } catch (error) {
-      console.error(`error 발생했음. 개발자에게 연락해주세요.`);
       console.error(error);
       throw error;
     }
@@ -20,12 +19,8 @@ const axiosClient = {
       );
       return response.data;
     } catch (error) {
-      if (error.response.status === 404) {
-        return false;
-      } else {
-        console.error(error);
-        throw error;
-      }
+      console.error(error);
+      throw error;
     }
   },
   writeMemo: async (keyword, uuid, context, slot) => {
