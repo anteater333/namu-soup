@@ -1,5 +1,5 @@
 import api from "../api/index";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Form,
@@ -13,14 +13,11 @@ import "moment-timezone";
 import { getRandomInt, placeholderData } from "../utils/random";
 import { UTCStrToKSTStr } from "../utils/timezone";
 import { Helmet } from "react-helmet-async";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 function MemoList() {
   // memos = [ { uuid, context, lastWriter } ], length = 10
-  const [memos, setMemos] = useState([]);
-  const [crawledAt, setCrawledAt] = useState("");
-  const [error, setError] = useState();
   const [memoError, setMemoError] = useState(""); // 메모 작성 중 발생한 에러
-  const [loading, setLoading] = useState(false);
   const [memoMode, setMemoMode] = useState(false);
   const [selectedMemo, setSelectedMemo] = useState("");
   const [selectedIdx, setSelectedIdx] = useState(-1);
@@ -29,28 +26,23 @@ function MemoList() {
   // ref. https://reactrouter.com/en/main/route/route#splats
   const { "*": keyword } = useParams();
 
-  const refreshList = useCallback(async () => {
-    setLoading(true);
-    try {
-      const result = await api.getMemoList(keyword);
-      if (result) {
-        setMemos(result[0]);
-        setCrawledAt(UTCStrToKSTStr(result[1]));
-      } else {
-        // 404 - 해당 키워드는 현재 서버에 저장된 실검 목록에 존재하지 않음
-        // eslint-disable-next-line no-restricted-globals
-        location.href = "/namu-soup";
-      }
-    } catch (error) {
-      console.error(error);
-      setError(error);
-    }
-    setLoading(false);
-  }, [keyword]);
+  const queryClient = useQueryClient();
 
+  const { data, error, isLoading, isError } = useQuery({
+    queryKey: ["memos"],
+    queryFn: () => api.getMemoList(keyword),
+  });
+
+  /** Error handler */
   useEffect(() => {
-    refreshList();
-  }, [refreshList]);
+    if (!isError) return;
+
+    if (error.response.status === 404) {
+      // 404 - 해당 키워드는 현재 서버에 저장된 실검 목록에 존재하지 않음
+      // eslint-disable-next-line no-restricted-globals
+      location.href = "/namu-soup";
+    }
+  }, [error, isError, keyword]);
 
   // Catch ESC for disabling memo mode
   useEffect(() => {
@@ -127,7 +119,7 @@ function MemoList() {
       setMemoMode(false);
     }
 
-    refreshList();
+    queryClient.invalidateQueries("memos");
   };
 
   const toggleMemoMode = () => {
@@ -177,7 +169,7 @@ function MemoList() {
     );
   }
 
-  const listItem = loading
+  const listItem = isLoading
     ? placeholderData.map((idx) => {
         const phLen = getRandomInt(1, 10);
         return (
@@ -197,7 +189,7 @@ function MemoList() {
           </ListGroupItem>
         );
       })
-    : memos.map((memo, idx) => {
+    : data[0].map((memo, idx) => {
         const memoButton = (
           <Button
             className="soup-button list-item-button fw-bold"
@@ -272,7 +264,9 @@ function MemoList() {
           >
             <div className="current-keyword">{keyword}</div>
           </a>
-          <div className="crawled-at">기준 시각 : {crawledAt}</div>
+          <div className="crawled-at">
+            기준 시각 : {isLoading ? "" : UTCStrToKSTStr(data[1])}
+          </div>
         </div>
         <div className="memo-list-scene-side">{inputForm}</div>
       </div>

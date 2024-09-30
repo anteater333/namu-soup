@@ -1,34 +1,18 @@
 import api from "../api/index";
-import { useCallback, useEffect, useState } from "react";
 import { Button, ListGroup, ListGroupItem, Placeholder } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getRandomInt, placeholderData } from "../utils/random";
 import { UTCStrToKSTStr } from "../utils/timezone";
 import { Helmet } from "react-helmet-async";
+import { useQuery } from "@tanstack/react-query";
 
 function TrendingList() {
-  const [trendings, setTrendings] = useState([]);
-  const [crawledAt, setCrawledAt] = useState("");
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["trendings"],
+    queryFn: api.getTrendingList,
+  });
 
-  const refreshList = useCallback(async () => {
-    setLoading(true);
-    try {
-      const result = await api.getTrendingList();
-      setTrendings(result[0]);
-      setCrawledAt(UTCStrToKSTStr(result[1]));
-    } catch (error) {
-      setError(error);
-    }
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    refreshList();
-  }, [refreshList]);
-
-  const listItem = loading
+  const listItem = isLoading
     ? placeholderData.map((idx) => {
         const phLen = getRandomInt(1, 10);
         return (
@@ -45,7 +29,7 @@ function TrendingList() {
           </ListGroupItem>
         );
       })
-    : trendings.map((trending, idx) => {
+    : data[0].map((trending, idx) => {
         return (
           <ListGroupItem
             key={trending.keyword}
@@ -77,6 +61,7 @@ function TrendingList() {
 
   let errorMessage;
   if (error) {
+    console.error(error);
     errorMessage = (
       <div className="error-page">
         <span className="error-message">서버에 접속할 수 없습니다.</span>
@@ -90,9 +75,9 @@ function TrendingList() {
         <title>숲Soup - 나무위키 실시간 검색어</title>
         <meta
           name="description"
-          content={`숲, 나무위키 실시간 검색어, ${trendings
-            .map((t) => t.keyword)
-            .join(", ")}`}
+          content={`숲, 나무위키 실시간 검색어, ${
+            isLoading ? "" : data[0].map((t) => t.keyword).join(", ")
+          }`}
         />
         <meta
           name="keywords"
@@ -103,7 +88,9 @@ function TrendingList() {
       <div className="list-container">
         {errorMessage}
         <ListGroup as="ol">{listItem}</ListGroup>
-        <div className="crawled-at">기준 시각 : {crawledAt}</div>
+        <div className="crawled-at">
+          기준 시각 : {isLoading ? "" : UTCStrToKSTStr(data[1])}
+        </div>
       </div>
     </>
   );
