@@ -50,6 +50,24 @@ const axiosClient = {
       throw error;
     }
   },
+  removeMemo: async ({ keyword, slot, pwd }) => {
+    const body = { pwd };
+    try {
+      await axios.delete(API_URL + `/${encodeURIComponent(keyword)}/${slot}`, {
+        data: body,
+      });
+
+      return [true, "done"];
+    } catch (error) {
+      console.error(error);
+      if (error.response) {
+        console.log(error.response);
+        return [(false, error.response)];
+      }
+
+      throw error;
+    }
+  },
 };
 
 export default axiosClient;

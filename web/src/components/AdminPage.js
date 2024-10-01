@@ -1,16 +1,9 @@
 import api from "../api/index";
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import {
-  Button,
-  Form,
-  ListGroup,
-  ListGroupItem,
-  Placeholder,
-} from "react-bootstrap";
+import { Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
-import moment from "moment";
 import "moment-timezone";
 
 function AdminPage() {
@@ -18,7 +11,12 @@ function AdminPage() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["trendings"],
     queryFn: api.getTrendingList,
+    refetchInterval: 5000,
   });
+  const mutation = useMutation({
+    mutationFn: api.removeMemo,
+  });
+  const queryClient = useQueryClient();
 
   return (
     <>
@@ -61,7 +59,17 @@ function AdminPage() {
                             </div>
                             <div className="last-writer">{memo.lastWriter}</div>
                           </div>
-                          <Button className="soup-button list-item-button">
+                          <Button
+                            className="soup-button list-item-button"
+                            onClick={async () => {
+                              await mutation.mutateAsync({
+                                keyword: trending.keyword,
+                                slot: jdx,
+                                pwd: adminPwd,
+                              });
+                              await queryClient.invalidateQueries("trendings");
+                            }}
+                          >
                             삭제
                           </Button>
                         </ListGroupItem>
@@ -84,7 +92,12 @@ function AdminPage() {
           )}
         </div>
         <div className="refresh-button-container mt-4">
-          <Button className="soup-button button-white">새로고침</Button>
+          <Button
+            className="soup-button button-white"
+            onClick={() => queryClient.invalidateQueries("trendings")}
+          >
+            새로고침
+          </Button>
         </div>
       </div>
     </>
