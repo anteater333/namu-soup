@@ -1,13 +1,11 @@
 {
   "files": {
-    "main.css": "/namu-soup/static/css/main.8ca5d3c6.css",
-    "main.js": "/namu-soup/static/js/main.d1df4574.js",
-    "static/js/907.0ce94113.chunk.js": "/namu-soup/static/js/907.0ce94113.chunk.js",
-    "static/js/518.1c2ca7c5.chunk.js": "/namu-soup/static/js/518.1c2ca7c5.chunk.js",
+    "main.css": "/namu-soup/static/css/main.d6d9d482.css",
+    "main.js": "/namu-soup/static/js/main.4dafbab9.js",
+    "static/js/907.2a91fbc6.chunk.js": "/namu-soup/static/js/907.2a91fbc6.chunk.js",
+    "static/js/518.623a3677.chunk.js": "/namu-soup/static/js/518.623a3677.chunk.js",
     "static/js/982.22cbaa4c.chunk.js": "/namu-soup/static/js/982.22cbaa4c.chunk.js",
     "static/js/787.5fbdf94a.chunk.js": "/namu-soup/static/js/787.5fbdf94a.chunk.js",
-    "static/js/368.1e12eeeb.chunk.js": "/namu-soup/static/js/368.1e12eeeb.chunk.js",
-    "static/js/114.d4190b89.chunk.js": "/namu-soup/static/js/114.d4190b89.chunk.js",
     "static/media/nanum-gothic-65-400-normal.woff2": "/namu-soup/static/media/nanum-gothic-65-400-normal.f00aebbfdbc6c145fa79.woff2",
     "static/media/nanum-gothic-74-400-normal.woff2": "/namu-soup/static/media/nanum-gothic-74-400-normal.584c12ee6ea6f305b682.woff2",
     "static/media/nanum-gothic-79-400-normal.woff2": "/namu-soup/static/media/nanum-gothic-79-400-normal.59d6100fcbe01e09fa84.woff2",
@@ -250,17 +248,15 @@
     "static/media/nanum-gothic-119-400-normal.woff": "/namu-soup/static/media/nanum-gothic-119-400-normal.3aa1fa252e12f19d7e93.woff",
     "index.html": "/namu-soup/index.html",
     "static/media/github-mark.svg": "/namu-soup/static/media/github-mark.6fa18895f6e6c7772cab7049f7e05f59.svg",
-    "main.8ca5d3c6.css.map": "/namu-soup/static/css/main.8ca5d3c6.css.map",
-    "main.d1df4574.js.map": "/namu-soup/static/js/main.d1df4574.js.map",
-    "907.0ce94113.chunk.js.map": "/namu-soup/static/js/907.0ce94113.chunk.js.map",
-    "518.1c2ca7c5.chunk.js.map": "/namu-soup/static/js/518.1c2ca7c5.chunk.js.map",
+    "main.d6d9d482.css.map": "/namu-soup/static/css/main.d6d9d482.css.map",
+    "main.4dafbab9.js.map": "/namu-soup/static/js/main.4dafbab9.js.map",
+    "907.2a91fbc6.chunk.js.map": "/namu-soup/static/js/907.2a91fbc6.chunk.js.map",
+    "518.623a3677.chunk.js.map": "/namu-soup/static/js/518.623a3677.chunk.js.map",
     "982.22cbaa4c.chunk.js.map": "/namu-soup/static/js/982.22cbaa4c.chunk.js.map",
-    "787.5fbdf94a.chunk.js.map": "/namu-soup/static/js/787.5fbdf94a.chunk.js.map",
-    "368.1e12eeeb.chunk.js.map": "/namu-soup/static/js/368.1e12eeeb.chunk.js.map",
-    "114.d4190b89.chunk.js.map": "/namu-soup/static/js/114.d4190b89.chunk.js.map"
+    "787.5fbdf94a.chunk.js.map": "/namu-soup/static/js/787.5fbdf94a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8ca5d3c6.css",
-    "static/js/main.d1df4574.js"
+    "static/css/main.d6d9d482.css",
+    "static/js/main.4dafbab9.js"
   ]
 }
