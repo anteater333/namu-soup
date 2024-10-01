@@ -166,6 +166,11 @@ a:hover {
   box-shadow: none !important;
 }
 
+.button-white {
+  background-color: white;
+  color: black;
+}
+
 .not-found-page {
   position: absolute;
   display: flex;
@@ -373,4 +378,49 @@ a:hover {
   width: 100%;
   max-width: 500px;
   background-color: white;
+}
+
+.password-form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.password-form-container > input {
+  width: 24rem;
+  text-align: center;
+}
+
+.refresh-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.total-list-container {
+  display: flex;
+  font-size: 0.75rem;
+}
+
+.total-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.total-memo-text {
+  overflow: visible;
+  text-overflow: clip;
+
+  word-wrap: break-word;
+  -webkit-line-clamp: unset;
+}
+
+.total-memo-list-item {
+  width: 10rem;
+  overflow-y: scroll;
+
+  scrollbar-width: none;
+
+  align-content: flex-start;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
