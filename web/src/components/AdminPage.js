@@ -11,7 +11,7 @@ function AdminPage() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["trendings"],
     queryFn: api.getTrendingList,
-    refetchInterval: 5000,
+    refetchInterval: 60000,
   });
   const mutation = useMutation({
     mutationFn: api.removeMemo,
