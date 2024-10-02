@@ -213,7 +213,6 @@ a:hover {
   color: #999999;
 }
 
-/* // deprecated
 .overlay {
   position: fixed;
   top: 0;
@@ -226,7 +225,8 @@ a:hover {
   background-color: black;
   opacity: 0.8;
   z-index: 5;
-} */
+  color: white;
+}
 
 .input-form-container {
   width: 100%;

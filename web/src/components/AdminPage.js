@@ -1,7 +1,7 @@
 import api from "../api/index";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import "moment-timezone";
@@ -18,11 +18,14 @@ function AdminPage() {
   });
   const queryClient = useQueryClient();
 
+  const [isDone, setIsDone] = useState(true);
+
   return (
     <>
       <Helmet>
         <title>숲Soup - 관리자 페이지</title>
       </Helmet>
+      {isDone ? undefined : <div className="overlay">... 처리 중 ...</div>}
       <div className="admin-page-scene">
         <div className="password-form-container">
           <Form.Control
@@ -62,12 +65,14 @@ function AdminPage() {
                           <Button
                             className="soup-button list-item-button"
                             onClick={async () => {
+                              setIsDone(false);
                               await mutation.mutateAsync({
                                 keyword: trending.keyword,
                                 slot: jdx,
                                 pwd: adminPwd,
                               });
                               await queryClient.invalidateQueries("trendings");
+                              setIsDone(true);
                             }}
                           >
                             삭제
@@ -94,7 +99,11 @@ function AdminPage() {
         <div className="refresh-button-container mt-4">
           <Button
             className="soup-button button-white"
-            onClick={() => queryClient.invalidateQueries("trendings")}
+            onClick={async () => {
+              setIsDone(false);
+              await queryClient.invalidateQueries("trendings");
+              setIsDone(true);
+            }}
           >
             새로고침
           </Button>
