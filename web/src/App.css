@@ -386,7 +386,8 @@ a:hover {
 }
 
 .password-form-container > input {
-  width: 24rem;
+  width: 80%;
+  max-width: 24rem;
   text-align: center;
 }
 
@@ -397,6 +398,8 @@ a:hover {
 
 .total-list-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   font-size: 0.75rem;
 }
 

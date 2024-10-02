@@ -42,7 +42,7 @@ function AdminPage() {
               return (
                 <div
                   key={`trending-memo-cotainer-${idx}`}
-                  className="total-list-item"
+                  className="total-list-item ms-1 me-1 mb-1"
                 >
                   <span className="fw-bold mb-2">{trending.keyword}</span>
                   <ListGroup>
