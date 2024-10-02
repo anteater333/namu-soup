@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/namu-soup/static/css/main.d6d9d482.css",
-    "main.js": "/namu-soup/static/js/main.4dafbab9.js",
+    "main.css": "/namu-soup/static/css/main.809343a3.css",
+    "main.js": "/namu-soup/static/js/main.f7eac631.js",
     "static/js/907.2a91fbc6.chunk.js": "/namu-soup/static/js/907.2a91fbc6.chunk.js",
     "static/js/518.623a3677.chunk.js": "/namu-soup/static/js/518.623a3677.chunk.js",
     "static/js/982.22cbaa4c.chunk.js": "/namu-soup/static/js/982.22cbaa4c.chunk.js",
@@ -248,15 +248,15 @@
     "static/media/nanum-gothic-119-400-normal.woff": "/namu-soup/static/media/nanum-gothic-119-400-normal.3aa1fa252e12f19d7e93.woff",
     "index.html": "/namu-soup/index.html",
     "static/media/github-mark.svg": "/namu-soup/static/media/github-mark.6fa18895f6e6c7772cab7049f7e05f59.svg",
-    "main.d6d9d482.css.map": "/namu-soup/static/css/main.d6d9d482.css.map",
-    "main.4dafbab9.js.map": "/namu-soup/static/js/main.4dafbab9.js.map",
+    "main.809343a3.css.map": "/namu-soup/static/css/main.809343a3.css.map",
+    "main.f7eac631.js.map": "/namu-soup/static/js/main.f7eac631.js.map",
     "907.2a91fbc6.chunk.js.map": "/namu-soup/static/js/907.2a91fbc6.chunk.js.map",
     "518.623a3677.chunk.js.map": "/namu-soup/static/js/518.623a3677.chunk.js.map",
     "982.22cbaa4c.chunk.js.map": "/namu-soup/static/js/982.22cbaa4c.chunk.js.map",
     "787.5fbdf94a.chunk.js.map": "/namu-soup/static/js/787.5fbdf94a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d6d9d482.css",
-    "static/js/main.4dafbab9.js"
+    "static/css/main.809343a3.css",
+    "static/js/main.f7eac631.js"
   ]
 }
