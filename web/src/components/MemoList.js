@@ -1,5 +1,5 @@
 import api from "../api/index";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Button,
   Form,
@@ -27,6 +27,8 @@ function MemoList() {
   const { "*": keyword } = useParams();
 
   const queryClient = useQueryClient();
+
+  const inputRef = useRef(null);
 
   const { data, error, isLoading, isError } = useQuery({
     queryKey: ["memos"],
@@ -67,12 +69,17 @@ function MemoList() {
     }
   }, [memoMode]);
 
+  useEffect(() => {
+    if (memoMode) inputRef.current.focus();
+  }, [memoMode]);
+
   const handleMemoButton = (memo, idx) => {
     setUuid(memo.uuid);
     setSelectedMemo(memo.context ? memo.context : "");
     setSelectedIdx(idx);
     setMemoError("");
     setMemoMode(!memoMode || idx !== selectedIdx);
+    inputRef.current.focus();
   };
 
   const handleSubmitButton = async () => {
@@ -132,6 +139,7 @@ function MemoList() {
       <>
         <div className="input-form-container">
           <Form.Control
+            ref={inputRef}
             className="input-form-control"
             as="input"
             value={selectedMemo}
