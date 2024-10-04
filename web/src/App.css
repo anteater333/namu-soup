@@ -199,6 +199,7 @@ a:hover {
   text-overflow: ellipsis;
   height: 1em;
   word-wrap: break-word;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
@@ -414,6 +415,7 @@ a:hover {
   text-overflow: clip;
 
   word-wrap: break-word;
+  line-clamp: unset;
   -webkit-line-clamp: unset;
 }
 
