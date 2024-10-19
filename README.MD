@@ -1,4 +1,4 @@
-<h1 align="center">숲Soup - 나무위키 실간 검색어</h1>
+<h1 align="center">숲Soup - 나무위키 실시간 검색어</h1>
 <h3 align="center">"바쁜 현대사회, 가끔은 나무 대신 숲을 봐야 할 때도 있습니다."</h3>
 
 <br/>
