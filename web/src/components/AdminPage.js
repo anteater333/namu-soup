@@ -47,7 +47,16 @@ function AdminPage() {
                   key={`trending-memo-cotainer-${idx}`}
                   className="total-list-item ms-1 me-1 mb-1"
                 >
-                  <span className="fw-bold mb-2">{trending.keyword}</span>
+                  <a
+                    href={
+                      "https://namu.wiki/w/" +
+                      encodeURIComponent(trending.keyword)
+                    }
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <span className="fw-bold mb-2">{trending.keyword}</span>
+                  </a>
                   <ListGroup>
                     {trending.memo.map((memo, jdx) => {
                       return memo.context ? (
