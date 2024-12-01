@@ -21,7 +21,6 @@
     "morgan": "^1.10.0",
     "node-fetch": "^3.2.3",
     "node-libcurl": "^2.3.4",
-    "selenium-webdriver": "^4.1.1",
     "uuid": "^8.3.2",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1"
